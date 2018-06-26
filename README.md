@@ -9,14 +9,14 @@
 ```javascript
 import { matrix } from "@cablanchard/matrix";
 
-const m = matrix(2,3, [default]); // Create 2x3 matrix
+const m = new Matrix(2,3, [default]); // Create 2x3 matrix
 
 // [
 // 	undefined, undefined, undefined,
 //   undefined, undefined, undefined,
 // ]
 
-const m = Matrix(2, 2, 0);
+const m = new Matrix(2, 2, 0);
 
 // [
 // 	0, 0,
