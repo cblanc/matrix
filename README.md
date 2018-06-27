@@ -29,13 +29,6 @@ Matrix(2, 2).fromFunction((i, j) => i)
 // 	0, 0,
 //  1, 1,
 // ]
-
-Matrix(2, 2).fromArray([1,2,3,4])
-
-// [
-// 	1, 2,
-//  3, 4,
-// ]
 ```
 
 ## Accessors
