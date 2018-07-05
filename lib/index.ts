@@ -7,10 +7,10 @@ export class Matrix<T> {
 	public m: number; // Number of rows
 	public n: number; // Number of columns
 
-	constructor(m: number, n: number, fill?: T) {
+	constructor(m: number, n: number) {
 		this.m = m;
 		this.n = n;
-		this.data = new Array(m * n).fill(fill);
+		this.data = new Array(m * n).fill(undefined);
 	}
 
 	/**
@@ -80,11 +80,22 @@ export class Matrix<T> {
 	 * @param  {FromFunctionIterator<T>} callback
 	 * @return {Matrix<T>}
 	 */
-	public fill(callback: FromFunctionIterator<T>): Matrix<T> {
-		this.data = this.data.map((elem, n) => {
+	public map(callback: FromFunctionIterator<T>): Matrix<T> {
+		const m = this.new
+		m.data = m.data.map((elem, n) => {
 			return callback(this.i(n), this.j(n));
 		});
-		return this;
+		return m;
+	}
+
+	/**
+	 * Fills all elems in matrix with value
+	 * @param  {T}         value
+	 * @return {Matrix<T>}
+	 */
+	public fill(value: T): Matrix<T> {
+		const m = this.new.map(() => value);
+		return m;
 	}
 
 	/**
@@ -113,5 +124,11 @@ export class Matrix<T> {
 		return new Array(this.m)
 			.fill(undefined)
 			.map((_, i) => this.iRow(i));
-	}	
+	}
+
+	get columns(): T[][] {
+		return new Array(this.n)
+			.fill(undefined)
+			.map((_, j) => this.jCol(j));
+	}
 }

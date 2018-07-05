@@ -23,7 +23,7 @@ const m = new Matrix(2, 2, 0);
 //  0, 0,
 // ]
 
-Matrix(2, 2).fill((i, j) => i)
+Matrix(2, 2).map((i, j) => i)
 
 // [
 // 	0, 0,
@@ -45,6 +45,11 @@ m.transpose    // Returns a new matrix which is a transpose of m
 ```
 
 ## Methods
+
+```
+m.get(i, j)			     		// Gets value at position i, j
+m.forEach((n, i, j))		// Iterates over all values n of matrix in positions i, j
+```
 
 Throws if 2 matrices are incompatible
 

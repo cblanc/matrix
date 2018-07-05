@@ -6,7 +6,7 @@ import {
 describe("Matrix", () => {
 	describe("#new", () => {
 		it ("creates a new matrix instance and assigns empty data", () => {
-			const mat = new Matrix(4, 4, 8);
+			const mat = new Matrix(4, 4);
 			const mat2 = mat.new;
 			assert.equal(mat.n, mat2.n);
 			assert.equal(mat.m, mat2.m);
@@ -55,14 +55,16 @@ describe("Matrix", () => {
 			assert.equal(mat.n, 3);
 		});
 
-		it ("accepts an optional fill argument", () => {
-			const mat = new Matrix(2,3, 0);
-			assert.isTrue(mat.data.every(e => e === 0));
+		describe("fill", () => {
+			it ("populates all elems with value", () => {
+				const mat = new Matrix(2,3).fill(0);
+				assert.isTrue(mat.data.every(e => e === 0));
+			});
 		});
 
-		describe("fill", () => {
+		describe("map", () => {
 			it ("generates a new matrix by iterating over every i and j", () => {
-				const mat = new Matrix<string>(2, 3).fill((i, j) => {
+				const mat = new Matrix<string>(2, 3).map((i, j) => {
 					return `${i},${j}`;
 				});
 				const expected = [
@@ -76,7 +78,7 @@ describe("Matrix", () => {
 
 	describe("iRow", () => {
 		it ("returns i'th row", () => {
-			const mat = new Matrix(3,4).fill(i => i);
+			const mat = new Matrix(3,4).map(i => i);
 			assert.deepEqual(mat.iRow(0), [0,0,0,0]);
 			assert.deepEqual(mat.iRow(1), [1,1,1,1]);
 			assert.deepEqual(mat.iRow(2), [2,2,2,2]);
@@ -85,7 +87,7 @@ describe("Matrix", () => {
 
 	describe("jCol", () => {
 		it ("returns j'th row", () => {
-			const mat = new Matrix(3,4).fill(i => i);
+			const mat = new Matrix(3,4).map(i => i);
 			assert.deepEqual(mat.jCol(0), [0,1,2]);
 			assert.deepEqual(mat.jCol(1), [0,1,2]);
 			assert.deepEqual(mat.jCol(2), [0,1,2]);
@@ -94,13 +96,27 @@ describe("Matrix", () => {
 
 	describe("rows", () => {
 		it ("returns an array of rows", () => {
-			const m = new Matrix(3,3).fill(i => i);
+			const m = new Matrix(3,3).map(i => i);
 			const expected = [
 				[0,0,0],
 				[1,1,1],
 				[2,2,2],
 			];
 			assert.deepEqual(m.rows, expected);
+		});
+	});
+
+	describe("columns", () => {
+		it ("returns an array of columns", () => {
+			const m = new Matrix(2,5).map(i => i);
+			const expected = [
+				[0,1],
+				[0,1],
+				[0,1],
+				[0,1],
+				[0,1],
+			];
+			assert.deepEqual(m.columns, expected);
 		});
 	});
 });
