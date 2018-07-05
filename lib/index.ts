@@ -86,4 +86,21 @@ export class Matrix<T> {
 		});
 		return this;
 	}
+
+	/**
+	 * Returns ith row
+	 * @param  {number} i
+	 * @return {T[]}
+	 */
+	public iRow(i: number): T[] {
+		const min = i * this.n;
+		const max = min + this.n;
+		return this.data.slice(min, max);
+	}
+
+	// get rows(): T[][] {
+	// 	return new Array(this.m).forEach((_, i) => {
+	// 		return 
+	// 	});
+	// }	
 }
