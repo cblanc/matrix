@@ -109,9 +109,9 @@ export class Matrix<T> {
 			.map((_, n) => this.data[n * this.n + j])
 	}
 
-	// get rows(): T[][] {
-	// 	return new Array(this.m).forEach((_, i) => {
-	// 		return 
-	// 	});
-	// }	
+	get rows(): T[][] {
+		return new Array(this.m)
+			.fill(undefined)
+			.map((_, i) => this.iRow(i));
+	}	
 }

@@ -92,15 +92,15 @@ describe("Matrix", () => {
 		});
 	});
 
-	// describe("rows", () => {
-	// 	it ("returns an array of rows", () => {
-	// 		const m = new Matrix(3,3).fill(i => i);
-	// 		const expected = [
-	// 			[0,0,0],
-	// 			[1,1,1],
-	// 			[2,2,2],
-	// 		];
-	// 		assert.deepEqual(m.rows, expected);
-	// 	});
-	// });
+	describe("rows", () => {
+		it ("returns an array of rows", () => {
+			const m = new Matrix(3,3).fill(i => i);
+			const expected = [
+				[0,0,0],
+				[1,1,1],
+				[2,2,2],
+			];
+			assert.deepEqual(m.rows, expected);
+		});
+	});
 });
