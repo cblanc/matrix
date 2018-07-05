@@ -120,15 +120,33 @@ export class Matrix<T> {
 			.map((_, n) => this.data[n * this.n + j])
 	}
 
+	/**
+	 * Returns an array of rows size m
+	 * @return {T[]}
+	 */
 	get rows(): T[][] {
 		return new Array(this.m)
 			.fill(undefined)
 			.map((_, i) => this.iRow(i));
 	}
 
+	/**
+	 * Returns an array of columns size n
+	 * @return {T[]}
+	 */
 	get columns(): T[][] {
 		return new Array(this.n)
 			.fill(undefined)
 			.map((_, j) => this.jCol(j));
+	}
+
+	/**
+	 * Retrives value at position i,j
+	 * @param  {number} i
+	 * @param  {number} j
+	 * @return {T}
+	 */
+	public get(i: number, j: number): T {
+		return this.iRow(i)[j];
 	}
 }

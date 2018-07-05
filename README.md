@@ -2,21 +2,23 @@
 
 # Matrix
 
-- No mutations, every accessor returns a fresh copy
+- No mutations (eats up memory)
+- Simple, readable implementation > performance
+- Familiar nomenclature for operations and matrix math
 
 ## Instantiation
 
 ```javascript
 import { matrix } from "@cablanchard/matrix";
 
-const m = new Matrix(2,3, [default]); // Create 2x3 matrix
+const m = new Matrix(2,3); // Create 2x3 matrix
 
 // [
 // 	undefined, undefined, undefined,
 //   undefined, undefined, undefined,
 // ]
 
-const m = new Matrix(2, 2, 0);
+const m = new Matrix(2, 2).fill(0);
 
 // [
 // 	0, 0,

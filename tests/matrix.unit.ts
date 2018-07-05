@@ -3,6 +3,8 @@ import {
 	Matrix,
 } from "../lib/index";
 
+const randomInt = (n: number): number => Math.floor(Math.random() * n);
+
 describe("Matrix", () => {
 	describe("#new", () => {
 		it ("creates a new matrix instance and assigns empty data", () => {
@@ -39,7 +41,7 @@ describe("Matrix", () => {
 		});
 	});
 
-	describe("size", () => {
+	describe("#size", () => {
 		it ("returns size of matrix", () => {
 			const mat = new Matrix(8, 7);
 			assert.equal(mat.size, 56);
@@ -55,14 +57,14 @@ describe("Matrix", () => {
 			assert.equal(mat.n, 3);
 		});
 
-		describe("fill", () => {
+		describe("#fill", () => {
 			it ("populates all elems with value", () => {
 				const mat = new Matrix(2,3).fill(0);
 				assert.isTrue(mat.data.every(e => e === 0));
 			});
 		});
 
-		describe("map", () => {
+		describe("#map", () => {
 			it ("generates a new matrix by iterating over every i and j", () => {
 				const mat = new Matrix<string>(2, 3).map((i, j) => {
 					return `${i},${j}`;
@@ -76,7 +78,7 @@ describe("Matrix", () => {
 		});
 	});
 
-	describe("iRow", () => {
+	describe("#iRow", () => {
 		it ("returns i'th row", () => {
 			const mat = new Matrix(3,4).map(i => i);
 			assert.deepEqual(mat.iRow(0), [0,0,0,0]);
@@ -85,7 +87,7 @@ describe("Matrix", () => {
 		});
 	});
 
-	describe("jCol", () => {
+	describe("#jCol", () => {
 		it ("returns j'th row", () => {
 			const mat = new Matrix(3,4).map(i => i);
 			assert.deepEqual(mat.jCol(0), [0,1,2]);
@@ -94,7 +96,7 @@ describe("Matrix", () => {
 		});
 	});
 
-	describe("rows", () => {
+	describe("#rows", () => {
 		it ("returns an array of rows", () => {
 			const m = new Matrix(3,3).map(i => i);
 			const expected = [
@@ -106,7 +108,7 @@ describe("Matrix", () => {
 		});
 	});
 
-	describe("columns", () => {
+	describe("#columns", () => {
 		it ("returns an array of columns", () => {
 			const m = new Matrix(2,5).map(i => i);
 			const expected = [
@@ -117,6 +119,15 @@ describe("Matrix", () => {
 				[0,1],
 			];
 			assert.deepEqual(m.columns, expected);
+		});
+	});
+
+	describe("#get", () => {
+		it ("retrieves the right value from a matrix given i and j", () => {
+			const mat = new Matrix(5, 4)
+				.map((i, j) => `${i},${j}`);
+			assert.equal(mat.get(1,2), "1,2");
+			assert.equal(mat.get(3,3), "3,3");
 		});
 	});
 });
