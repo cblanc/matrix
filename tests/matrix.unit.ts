@@ -75,14 +75,23 @@ describe("Matrix", () => {
 	});
 
 	describe("iRow", () => {
-		it ("returns ith row", () => {
+		it ("returns i'th row", () => {
 			const mat = new Matrix(3,4).fill(i => i);
 			assert.deepEqual(mat.iRow(0), [0,0,0,0]);
 			assert.deepEqual(mat.iRow(1), [1,1,1,1]);
 			assert.deepEqual(mat.iRow(2), [2,2,2,2]);
 		});
 	});
-	
+
+	describe("jCol", () => {
+		it ("returns j'th row", () => {
+			const mat = new Matrix(3,4).fill(i => i);
+			assert.deepEqual(mat.jCol(0), [0,1,2]);
+			assert.deepEqual(mat.jCol(1), [0,1,2]);
+			assert.deepEqual(mat.jCol(2), [0,1,2]);
+		});
+	});
+
 	// describe("rows", () => {
 	// 	it ("returns an array of rows", () => {
 	// 		const m = new Matrix(3,3).fill(i => i);

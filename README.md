@@ -35,7 +35,7 @@ Matrix(2, 2).fill((i, j) => i)
 
 ```javascript
 m.iRow         // Returns i'th row
-m.jColumn      // Returns j'th row
+m.jCol         // Returns j'th row
 m.rows         // Returns an array of 1D matrices representing rows
 m.columns      // Returns an array of 1D matrices representing columns
 m.kDiagonal    // Returns k'th diagonal

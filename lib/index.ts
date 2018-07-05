@@ -98,6 +98,17 @@ export class Matrix<T> {
 		return this.data.slice(min, max);
 	}
 
+	/**
+	 * Returns j'th column
+	 * @param  {number} j
+	 * @return {T[]}
+	 */
+	public jCol(j: number): T[] {
+		return new Array(this.m)
+			.fill(undefined)
+			.map((_, n) => this.data[n * this.n + j])
+	}
+
 	// get rows(): T[][] {
 	// 	return new Array(this.m).forEach((_, i) => {
 	// 		return 
