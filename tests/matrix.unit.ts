@@ -59,5 +59,18 @@ describe("Matrix", () => {
 			const m = new Matrix(2,3, 0);
 			assert.isTrue(m._matrix.every(e => e === 0));
 		});
+
+		describe("fill", () => {
+			it ("generates a new matrix by iterating over every i and j", () => {
+				const m = new Matrix<string>(2, 3).fill((i, j) => {
+					return `${i},${j}`;
+				});
+				const expected = [
+					"0,0","0,1","0,2",
+					"1,0","1,1","1,2",
+				];
+				assert.deepEqual(m._matrix, expected);
+			});
+		});
 	});
 });

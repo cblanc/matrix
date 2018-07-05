@@ -23,7 +23,7 @@ const m = new Matrix(2, 2, 0);
 //  0, 0,
 // ]
 
-Matrix(2, 2).fromFunction((i, j) => i)
+Matrix(2, 2).fill((i, j) => i)
 
 // [
 // 	0, 0,
