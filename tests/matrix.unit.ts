@@ -5,71 +5,71 @@ import {
 
 describe("Matrix", () => {
 	describe("#new", () => {
-		it ("creates a new matrix instance and assigns empty _matrix", () => {
-			const m = new Matrix(4, 4, 8);
-			const n = m.new;
-			assert.equal(n.rows, m.rows);
-			assert.equal(n.columns, m.columns);
-			assert.notEqual(m, n);
+		it ("creates a new matrix instance and assigns empty data", () => {
+			const mat = new Matrix(4, 4, 8);
+			const mat2 = mat.new;
+			assert.equal(mat.n, mat2.n);
+			assert.equal(mat.m, mat2.m);
+			assert.notEqual(mat, mat2);
 		});
 	});
 
 	describe("matrix getter", () => {
 		it ("returns copy of underlying data structure", () => {
-			const m = new Matrix(2,2);
-			const _m = m.matrix;
-			assert.deepEqual(_m, m.matrix);
-			assert.notEqual(_m, m.matrix);
+			const mat = new Matrix(2,2);
+			const _m = mat.matrix;
+			assert.deepEqual(_m, mat.matrix);
+			assert.notEqual(_m, mat.matrix);
 		});
 	});
 
 	describe("matrix setter", () => {
 		it ("assigns matrix", () => {
-			const m = new Matrix(2,2);
-			m.matrix.forEach(assert.isUndefined.bind(assert));
+			const mat = new Matrix(2,2);
+			mat.matrix.forEach(assert.isUndefined.bind(assert));
 			const n = 1;
-			m.matrix = new Array(4).fill(n);
-			m.matrix.forEach(e => assert.equal(e, n));
+			mat.matrix = new Array(4).fill(n);
+			mat.matrix.forEach(e => assert.equal(e, n));
 		});
 		it ("throws if invalid size", () => {
-			const m = new Matrix(3,2);
+			const mat = new Matrix(3,2);
 			assert.throws(() => {
-				m.matrix = [1,2];
+				mat.matrix = [1,2];
 			}, Error)
 		});
 	});
 
 	describe("size", () => {
 		it ("returns size of matrix", () => {
-			const m = new Matrix(8, 7);
-			assert.equal(m.size, 56);
+			const mat = new Matrix(8, 7);
+			assert.equal(mat.size, 56);
 		});
 	});
 
 	describe("instantiation", () => {
 		it ("creates a matrix initialised to undefined", () => {
-			const m = new Matrix(2,3);
-			assert.isTrue(m._matrix.every(e => e === undefined));
-			assert.equal(m._matrix.length, 6);
-			assert.equal(m.rows, 2);
-			assert.equal(m.columns, 3);
+			const mat = new Matrix(2,3);
+			assert.isTrue(mat.data.every(e => e === undefined));
+			assert.equal(mat.data.length, 6);
+			assert.equal(mat.m, 2);
+			assert.equal(mat.n, 3);
 		});
 
 		it ("accepts an optional fill argument", () => {
-			const m = new Matrix(2,3, 0);
-			assert.isTrue(m._matrix.every(e => e === 0));
+			const mat = new Matrix(2,3, 0);
+			assert.isTrue(mat.data.every(e => e === 0));
 		});
 
 		describe("fill", () => {
 			it ("generates a new matrix by iterating over every i and j", () => {
-				const m = new Matrix<string>(2, 3).fill((i, j) => {
+				const mat = new Matrix<string>(2, 3).fill((i, j) => {
 					return `${i},${j}`;
 				});
 				const expected = [
 					"0,0","0,1","0,2",
 					"1,0","1,1","1,2",
 				];
-				assert.deepEqual(m._matrix, expected);
+				assert.deepEqual(mat.data, expected);
 			});
 		});
 	});

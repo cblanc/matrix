@@ -3,14 +3,14 @@ interface FromFunctionIterator<T> {
 }
 
 export class Matrix<T> {
-	public _matrix: T[];
-	public rows: number;
-	public columns: number;
+	public data: T[];
+	public m: number; // Number of rows
+	public n: number; // Number of columns
 
-	constructor(rows: number, columns: number, fill?: T) {
-		this.rows = rows;
-		this.columns = columns;
-		this._matrix = new Array(rows * columns).fill(fill);
+	constructor(m: number, n: number, fill?: T) {
+		this.m = m;
+		this.n = n;
+		this.data = new Array(m * n).fill(fill);
 	}
 
 	/**
@@ -18,7 +18,7 @@ export class Matrix<T> {
 	 * @return {number}
 	 */
 	get size(): number {
-		return this.rows * this.columns;
+		return this.m * this.n;
 	}
 
 	/**
@@ -26,8 +26,8 @@ export class Matrix<T> {
 	 * @return {Matrix<T>}
 	 */
 	get new(): Matrix<T> {
-		const m = new Matrix<T>(this.rows, this.columns);
-		m.matrix = this._matrix.slice(0);
+		const m = new Matrix<T>(this.m, this.n);
+		m.matrix = this.data.slice(0);
 
 		return m;
 	}
@@ -37,51 +37,51 @@ export class Matrix<T> {
 	 * @return {T[]}
 	 */
 	get matrix(): T[] {
-		return this._matrix.slice(0);
+		return this.data.slice(0);
 	}
 
 	/**
 	 * Sets underlying data structure
-	 * @param {T[]} _matrix
+	 * @param {T[]} data
 	 */
-	set matrix(_matrix: T[]) {
+	set matrix(data: T[]) {
 		const { size } = this;
-		if (_matrix.length !== this.size) {
-			const { rows, columns } = this;
+		if (data.length !== this.size) {
+			const { m, n } = this;
 			const msg = [
 				`Invalid array size presented`,
-				`Expecting ${size} for a ${rows} by ${columns} matrix`,
+				`Expecting ${size} for a ${m} by ${n} matrix`,
 			].join(". ")
 			throw new Error(msg);
 		}
-		this._matrix = _matrix;
+		this.data = data;
 	}
 
 	/**
-	 * Returns i (row number) given position n of _matrix
+	 * Returns i (row number) given position n of data
 	 * @param  {number} n 
 	 * @return {number}
 	 */
 	private i(n: number): number {
-		return Math.floor(n / this.columns);
+		return Math.floor(n / this.n);
 	}
 
 	/**
-	 * Returns j (column number) given position n of _matrix
+	 * Returns j (column number) given position n of data
 	 * @param  {number} n 
 	 * @return {number}
 	 */
 	private j(n: number): number {
-		return n % this.columns;
+		return n % this.n;
 	}
-	
+
 	/**
 	 * Populates a matrix with a function that iterates over i and j
 	 * @param  {FromFunctionIterator<T>} callback
 	 * @return {Matrix<T>}
 	 */
 	public fill(callback: FromFunctionIterator<T>): Matrix<T> {
-		this._matrix = this._matrix.map((elem, n) => {
+		this.data = this.data.map((elem, n) => {
 			return callback(this.i(n), this.j(n));
 		});
 		return this;

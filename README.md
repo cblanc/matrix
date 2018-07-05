@@ -41,7 +41,7 @@ m.antiDiagonal // Returns main antidiagonal
 m.transpose    // Returns a new matrix which is a transpose of m
 ```
 
-## Methods
+## Methods
 
 Throws if 2 matrices are incompatible
 
