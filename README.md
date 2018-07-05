@@ -34,8 +34,11 @@ Matrix(2, 2).fill((i, j) => i)
 ## Accessors
 
 ```javascript
+m.iRow         // Returns i'th row
+m.jColumn      // Returns j'th row
 m.rows         // Returns an array of 1D matrices representing rows
 m.columns      // Returns an array of 1D matrices representing columns
+m.kDiagonal    // Returns k'th diagonal
 m.diagonal     // Returns main diagonal
 m.antiDiagonal // Returns main antidiagonal
 m.transpose    // Returns a new matrix which is a transpose of m
@@ -47,7 +50,7 @@ Throws if 2 matrices are incompatible
 
 ```javascript
 m.add()
-m.subtract
+m.subtract()
 m.mutiply()
 m.resize(m, n)
 ```
