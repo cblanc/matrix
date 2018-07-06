@@ -1,3 +1,7 @@
+import {
+	OutOfBoundsError,
+} from "./errors";
+
 interface FromFunctionIterator<T> {
 	(i: number, j: number): T;
 }
@@ -28,7 +32,6 @@ export class Matrix<T> {
 	get new(): Matrix<T> {
 		const m = new Matrix<T>(this.m, this.n);
 		m.matrix = this.data.slice(0);
-
 		return m;
 	}
 
@@ -104,8 +107,12 @@ export class Matrix<T> {
 	 * @return {T[]}
 	 */
 	public iRow(i: number): T[] {
-		const min = i * this.n;
-		const max = min + this.n;
+		const { m, n } = this;
+		if (i < 0 || i >= m) {
+			throw new OutOfBoundsError(`Cannot access i=${i} of a ${m}x${n} matrix`);
+		}
+		const min = i * n;
+		const max = min + n;
 		return this.data.slice(min, max);
 	}
 
@@ -115,9 +122,13 @@ export class Matrix<T> {
 	 * @return {T[]}
 	 */
 	public jCol(j: number): T[] {
-		return new Array(this.m)
+		const { m, n } = this;
+		if (j < 0 || j >= n) {
+			throw new OutOfBoundsError(`Cannot access j=${j} of a ${m}x${n} matrix`);
+		}
+		return new Array(m)
 			.fill(undefined)
-			.map((_, n) => this.data[n * this.n + j])
+			.map((_, int) => this.data[int * n + j])
 	}
 
 	/**

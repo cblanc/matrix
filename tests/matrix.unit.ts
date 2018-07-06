@@ -1,5 +1,8 @@
 import { assert } from "chai";
 import {
+	OutOfBoundsError
+} from "../lib/errors";
+import {
 	Matrix,
 } from "../lib/index";
 
@@ -85,6 +88,15 @@ describe("Matrix", () => {
 			assert.deepEqual(mat.iRow(1), [1,1,1,1]);
 			assert.deepEqual(mat.iRow(2), [2,2,2,2]);
 		});
+		it ("throws if i is out of range", () => {
+			const mat = new Matrix(2,2);
+			assert.throws(() => {
+				mat.iRow(2);
+			}, RangeError);
+			assert.throws(() => {
+				mat.iRow(-1);
+			}, RangeError);
+		});
 	});
 
 	describe("#jCol", () => {
@@ -93,6 +105,15 @@ describe("Matrix", () => {
 			assert.deepEqual(mat.jCol(0), [0,1,2]);
 			assert.deepEqual(mat.jCol(1), [0,1,2]);
 			assert.deepEqual(mat.jCol(2), [0,1,2]);
+		});
+		it ("throws if j is out of range", () => {
+			const mat = new Matrix(2,2);
+			assert.throws(() => {
+				mat.jCol(2);
+			}, RangeError);
+			assert.throws(() => {
+				mat.jCol(-1);
+			}, RangeError);
 		});
 	});
 
