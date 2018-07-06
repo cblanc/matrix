@@ -36,11 +36,8 @@ Matrix(2, 2).map((i, j) => i)
 ## Accessors
 
 ```javascript
-m.iRow         // Returns i'th row
-m.jCol         // Returns j'th row
 m.rows         // Returns an array of 1D matrices representing rows
 m.columns      // Returns an array of 1D matrices representing columns
-m.kDiagonal    // Returns k'th diagonal
 m.diagonal     // Returns main diagonal
 m.antiDiagonal // Returns main antidiagonal
 m.transpose    // Returns a new matrix which is a transpose of m
@@ -49,6 +46,9 @@ m.transpose    // Returns a new matrix which is a transpose of m
 ## Methods
 
 ```
+m.iRow(i)         			// Returns i'th row
+m.jCol(j)         			// Returns j'th column
+m.kDiagonal(k)  			  // Returns k'th diagonal
 m.get(i, j)			     		// Gets value at position i, j
 m.forEach((n, i, j))		// Iterates over all values n of matrix in positions i, j
 ```
