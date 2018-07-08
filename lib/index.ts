@@ -107,10 +107,8 @@ export class Matrix<T> {
 	 * @return {T[]}
 	 */
 	public iRow(i: number): T[] {
-		const { m, n } = this;
-		if (i < 0 || i >= m) {
-			throw new OutOfBoundsError(`Cannot access i=${i} of a ${m}x${n} matrix`);
-		}
+		this.checkI(i);
+		const { n } = this;
 		const min = i * n;
 		const max = min + n;
 		return this.data.slice(min, max);
@@ -122,10 +120,8 @@ export class Matrix<T> {
 	 * @return {T[]}
 	 */
 	public jCol(j: number): T[] {
+		this.checkJ(j);
 		const { m, n } = this;
-		if (j < 0 || j >= n) {
-			throw new OutOfBoundsError(`Cannot access j=${j} of a ${m}x${n} matrix`);
-		}
 		return new Array(m)
 			.fill(undefined)
 			.map((_, int) => this.data[int * n + j])
@@ -158,10 +154,30 @@ export class Matrix<T> {
 	 * @return {T}
 	 */
 	public get(i: number, j: number): T {
+		this.checkI(i);
+		this.checkJ(j);
+		return this.iRow(i)[j];
+	}
+
+	/**
+	 * Throws if i is out of range
+	 * @param {number} i
+	 */
+	private checkI(i: number): void {
+		const { m, n } = this;
+		if (i < 0 || i >= n) {
+			throw new OutOfBoundsError(`Cannot access i=${i} of a ${m}x${n} matrix`);
+		}
+	}
+
+	/**
+	 * Throws if j is out of range
+	 * @param {number} j
+	 */
+	private checkJ(j: number): void {
 		const { m, n } = this;
 		if (j < 0 || j >= n) {
 			throw new OutOfBoundsError(`Cannot access j=${j} of a ${m}x${n} matrix`);
-		} 
-		return this.iRow(i)[j];
+		}
 	}
 }
