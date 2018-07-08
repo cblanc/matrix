@@ -158,6 +158,10 @@ export class Matrix<T> {
 	 * @return {T}
 	 */
 	public get(i: number, j: number): T {
+		const { m, n } = this;
+		if (j < 0 || j >= n) {
+			throw new OutOfBoundsError(`Cannot access j=${j} of a ${m}x${n} matrix`);
+		} 
 		return this.iRow(i)[j];
 	}
 }

@@ -45,7 +45,9 @@ m.transpose    // Returns a new matrix which is a transpose of m
 
 ## Methods
 
-```
+Throws if elems are out of bounds
+
+```javascript
 m.iRow(i)         			// Returns i'th row
 m.jCol(j)         			// Returns j'th column
 m.kDiagonal(k)  			  // Returns k'th diagonal
@@ -64,7 +66,7 @@ m.resize(m, n)
 
 ## Utils
 
-```
+```javascript
 m.toString()
 m.toJSON()
 ```

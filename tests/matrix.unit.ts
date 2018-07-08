@@ -144,11 +144,27 @@ describe("Matrix", () => {
 	});
 
 	describe("#get", () => {
+		let mat: Matrix<string>;
+
+		beforeEach(() => {
+			mat = new Matrix<string>(5, 4).map((i, j) => `${i},${j}`);
+		});
+
 		it ("retrieves the right value from a matrix given i and j", () => {
-			const mat = new Matrix(5, 4)
-				.map((i, j) => `${i},${j}`);
 			assert.equal(mat.get(1,2), "1,2");
 			assert.equal(mat.get(3,3), "3,3");
+		});
+
+		it ("throws if i out of bounds", () => {
+			assert.throws(() => {
+				mat.get(5,2);
+			}, RangeError);
+		});
+
+		it ("throws if j out of bounds", () => {
+			assert.throws(() => {
+				mat.get(2,4);
+			}, RangeError);
 		});
 	});
 });
