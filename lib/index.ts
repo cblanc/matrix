@@ -1,4 +1,8 @@
 import {
+	padder
+} from "./utils";
+
+import {
 	OutOfBoundsError,
 } from "./errors";
 
@@ -179,5 +183,26 @@ export class Matrix<T> {
 		if (j < 0 || j >= n) {
 			throw new OutOfBoundsError(`Cannot access j=${j} of a ${m}x${n} matrix`);
 		}
+	}
+
+	// get transpose(): Matrix<T> {
+	// 	return new Matrix<T>(this.n, this.m).map((i, j) => {
+	// 		return this.get(j, i);
+	// 	});
+	// }
+
+	public toString(): string {
+		const maxLength: number = this.data
+			.map(elem => `${elem}`.length)
+			.reduce((prev, curr) => {
+				return (curr > prev) ? curr : prev
+			});
+		const leftPad = padder(maxLength);
+		return this.rows
+			.map(row => {
+				return row.map(elem => leftPad(`${elem}`))
+			})
+			.map(row => row.join(" "))
+			.join("\n");
 	}
 }

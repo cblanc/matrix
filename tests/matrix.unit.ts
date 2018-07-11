@@ -167,4 +167,32 @@ describe("Matrix", () => {
 			}, RangeError);
 		});
 	});
+
+	// describe("#transpose", () => {
+	// 	it ("returns transpose of a matrix", () => {
+	// 		// 0,0 0,1 0,2
+	// 		// 1,0 1,1 1,2
+	// 		// 
+	// 		// => is transposed to
+	// 		// 0,0 1,0
+	// 		// 0,1 1,0 
+	// 		// 0,2 1,2
+	// 		const m1 = new Matrix(2,3).map((i, j) => `${i},${j}`);
+	// 		assert.deepEqual(m1.transpose.rows, [
+	// 			["0,0", "1,0"],
+	// 			["0,1", "1,0"],
+	// 			["0,2", "1,2"],
+	// 		]);
+	// 	});
+	// });
+
+	describe("toString", () => {
+		it ("renders matrix as string", () => {
+			const m = new Matrix(2,3).map((i, j) => Math.pow(10, j) + i);
+			assert.equal(m.toString(), [
+				["  1  10 100"],
+				["  2  11 101"],
+			].join("\n"))
+		});
+	});
 });

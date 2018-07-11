@@ -68,5 +68,4 @@ m.resize(m, n)
 
 ```javascript
 m.toString()
-m.toJSON()
 ```
