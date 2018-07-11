@@ -169,7 +169,7 @@ export class Matrix<T> {
 	 */
 	private checkI(i: number): void {
 		const { m, n } = this;
-		if (i < 0 || i >= n) {
+		if (i < 0 || i >= m) {
 			throw new OutOfBoundsError(`Cannot access i=${i} of a ${m}x${n} matrix`);
 		}
 	}
@@ -185,11 +185,10 @@ export class Matrix<T> {
 		}
 	}
 
-	// get transpose(): Matrix<T> {
-	// 	return new Matrix<T>(this.n, this.m).map((i, j) => {
-	// 		return this.get(j, i);
-	// 	});
-	// }
+	get transpose(): Matrix<T> {
+		return new Matrix<T>(this.n, this.m)
+			.map((i, j) => this.get(j, i));
+	}
 
 	public toString(): string {
 		const maxLength: number = this.data

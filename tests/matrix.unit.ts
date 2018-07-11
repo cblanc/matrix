@@ -151,13 +151,19 @@ describe("Matrix", () => {
 		});
 
 		it ("retrieves the right value from a matrix given i and j", () => {
-			assert.equal(mat.get(1,2), "1,2");
-			assert.equal(mat.get(3,3), "3,3");
+			for (let i = 0; i < 5; i++) {
+				for (let j = 0; j < 4; j++) {
+					assert.equal(mat.get(i,j), `${i},${j}`);
+				}
+			}
 		});
 
 		it ("throws if i out of bounds", () => {
 			assert.throws(() => {
 				mat.get(5,2);
+			}, RangeError);
+			assert.throws(() => {
+				mat.get(-1,2);
 			}, RangeError);
 		});
 
@@ -165,26 +171,29 @@ describe("Matrix", () => {
 			assert.throws(() => {
 				mat.get(2,4);
 			}, RangeError);
+			assert.throws(() => {
+				mat.get(2,-1);
+			}, RangeError);
 		});
 	});
 
-	// describe("#transpose", () => {
-	// 	it ("returns transpose of a matrix", () => {
-	// 		// 0,0 0,1 0,2
-	// 		// 1,0 1,1 1,2
-	// 		// 
-	// 		// => is transposed to
-	// 		// 0,0 1,0
-	// 		// 0,1 1,0 
-	// 		// 0,2 1,2
-	// 		const m1 = new Matrix(2,3).map((i, j) => `${i},${j}`);
-	// 		assert.deepEqual(m1.transpose.rows, [
-	// 			["0,0", "1,0"],
-	// 			["0,1", "1,0"],
-	// 			["0,2", "1,2"],
-	// 		]);
-	// 	});
-	// });
+	describe("#transpose", () => {
+		it ("returns transpose of a matrix", () => {
+			// 0,0 0,1 0,2
+			// 1,0 1,1 1,2
+			// 
+			// => is transposed to
+			// 0,0 1,0
+			// 0,1 1,1 
+			// 0,2 1,2
+			const m1 = new Matrix(2,3).map((i, j) => `${i},${j}`);
+			assert.deepEqual(m1.transpose.rows, [
+				["0,0", "1,0"],
+				["0,1", "1,1"],
+				["0,2", "1,2"],
+			]);
+		});
+	});
 
 	describe("toString", () => {
 		it ("renders matrix as string", () => {
