@@ -204,4 +204,25 @@ describe("Matrix", () => {
 			].join("\n"))
 		});
 	});
+
+	describe("forEach", () => {
+		it ("iterates over every elem in order (i =0 ...m, left to right)", () => {
+			const m = new Matrix<string>(3,3).map((i, j) => `${i},${j}`);
+			const elems: string[] = [];
+			const is: number[] = [];
+			const js: number[] = [];
+			m.forEach((elem, i, j) => {
+				elems.push(elem);
+				is.push(i);
+				js.push(j);
+			});
+			assert.deepEqual(elems, [
+				"0,0","0,1","0,2",
+				"1,0","1,1","1,2",
+				"2,0","2,1","2,2",
+			]);
+			assert.deepEqual(is, [0,0,0,1,1,1,2,2,2]);
+			assert.deepEqual(js, [0,1,2,0,1,2,0,1,2]);
+		});
+	});
 });

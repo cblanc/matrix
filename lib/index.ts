@@ -204,4 +204,10 @@ export class Matrix<T> {
 			.map(row => row.join(" "))
 			.join("\n");
 	}
+
+	public forEach(cb: (elem: T, i: number, j: number) => void): void {	
+		return this.data.forEach((elem, i) => {
+			cb(elem, Math.floor(i / this.n) ,i % this.n);
+		});
+	}
 }
