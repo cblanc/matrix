@@ -8,6 +8,8 @@ import {
 
 const randomInt = (n: number): number => Math.floor(Math.random() * n);
 
+const mapCoords = (i:number, j: number): string => `${i},${j}`;
+
 describe("Matrix", () => {
 	describe("#new", () => {
 		it ("creates a new matrix instance and assigns empty data", () => {
@@ -69,9 +71,7 @@ describe("Matrix", () => {
 
 		describe("#map", () => {
 			it ("generates a new matrix by iterating over every i and j", () => {
-				const mat = new Matrix<string>(2, 3).map((i, j) => {
-					return `${i},${j}`;
-				});
+				const mat = new Matrix<string>(2, 3).map(mapCoords);
 				const expected = [
 					"0,0","0,1","0,2",
 					"1,0","1,1","1,2",
@@ -147,7 +147,7 @@ describe("Matrix", () => {
 		let mat: Matrix<string>;
 
 		beforeEach(() => {
-			mat = new Matrix<string>(5, 4).map((i, j) => `${i},${j}`);
+			mat = new Matrix<string>(5, 4).map(mapCoords);
 		});
 
 		it ("retrieves the right value from a matrix given i and j", () => {
@@ -186,7 +186,7 @@ describe("Matrix", () => {
 			// 0,0 1,0
 			// 0,1 1,1 
 			// 0,2 1,2
-			const m1 = new Matrix(2,3).map((i, j) => `${i},${j}`);
+			const m1 = new Matrix(2,3).map(mapCoords);
 			assert.deepEqual(m1.transpose.rows, [
 				["0,0", "1,0"],
 				["0,1", "1,1"],
@@ -207,7 +207,7 @@ describe("Matrix", () => {
 
 	describe("forEach", () => {
 		it ("iterates over every elem in order (i =0 ...m, left to right)", () => {
-			const m = new Matrix<string>(3,3).map((i, j) => `${i},${j}`);
+			const m = new Matrix<string>(3,3).map(mapCoords);
 			const elems: string[] = [];
 			const is: number[] = [];
 			const js: number[] = [];
@@ -224,5 +224,21 @@ describe("Matrix", () => {
 			assert.deepEqual(is, [0,0,0,1,1,1,2,2,2]);
 			assert.deepEqual(js, [0,1,2,0,1,2,0,1,2]);
 		});
+	});
+
+	describe("kDiagonal", () => {
+		it ("returns 0th diagonal", () => {
+			const m = new Matrix(3,3).map(mapCoords);
+			assert.deepEqual(m.kDigaonal(0), [
+				"0,0","1,1","2,2",
+			]);
+			const n = new Matrix(3,2).map(mapCoords);
+			assert.deepEqual(n.kDigaonal(0), [
+				"0,0","1,1",
+			]);
+
+		});
+		it ("returns 1st diagonal");
+		it ("returns -1st diagonal");
 	});
 });

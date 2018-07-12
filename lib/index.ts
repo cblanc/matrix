@@ -210,4 +210,15 @@ export class Matrix<T> {
 			cb(elem, Math.floor(i / this.n) ,i % this.n);
 		});
 	}
+
+	public kDigaonal(k: number): T[] {
+		const { m, n } = this;
+		const maxDiagonalSize = (m < n) ? m : n;
+		const diagonal = new Array(maxDiagonalSize)
+			.fill(undefined)
+			.map((_, i) => [i, i])
+			.map(([i, j]) => this.get(i, j));
+
+		return diagonal;
+	}
 }
