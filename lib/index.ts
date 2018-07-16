@@ -231,4 +231,12 @@ export class Matrix<T> {
 			.filter(([_, j]) => j >= 0 && j < this.n)	// Reject out of bounds j
 			.map(([i, j]) => this.get(i, j));
 	}
+
+	/**
+	 * Returns 0th digaonal
+	 * @return {T[]} [description]
+	 */
+	get diagonal(): T[] {
+		return this.kDigaonal(0);
+	}
 }

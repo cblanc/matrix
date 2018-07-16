@@ -269,4 +269,17 @@ describe("Matrix", () => {
 			]);
 		});
 	});
+
+	describe("diagonal", () => {
+		it ("returns main diagonal", () => {
+			const square = new Matrix<string>(3,3).map(mapCoords);
+			const tall = new Matrix<string>(3,2).map(mapCoords);
+			const wide = new Matrix<string>(2,3).map(mapCoords);
+
+			assert.deepEqual(square.diagonal, square.kDigaonal(0));
+			assert.deepEqual(wide.diagonal, wide.kDigaonal(0));
+			assert.deepEqual(tall.diagonal, tall.kDigaonal(0));
+		});
+	})
+
 });
