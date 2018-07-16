@@ -227,18 +227,46 @@ describe("Matrix", () => {
 	});
 
 	describe("kDiagonal", () => {
+		let square: Matrix<string>, tall: Matrix<string>, wide: Matrix<string>;
+
+		beforeEach(() => {
+			square = new Matrix<string>(3,3).map(mapCoords);
+			tall = new Matrix<string>(3,2).map(mapCoords);
+			wide = new Matrix<string>(2,3).map(mapCoords);
+		});
+
 		it ("returns 0th diagonal", () => {
-			const m = new Matrix(3,3).map(mapCoords);
-			assert.deepEqual(m.kDigaonal(0), [
+			assert.deepEqual(square.kDigaonal(0), [
 				"0,0","1,1","2,2",
 			]);
-			const n = new Matrix(3,2).map(mapCoords);
-			assert.deepEqual(n.kDigaonal(0), [
+			assert.deepEqual(tall.kDigaonal(0), [
 				"0,0","1,1",
 			]);
-
+			assert.deepEqual(wide.kDigaonal(0), [
+				"0,0","1,1",
+			]);
 		});
-		it ("returns 1st diagonal");
-		it ("returns -1st diagonal");
+		it ("returns 1st diagonal", () => {
+			assert.deepEqual(square.kDigaonal(1), [
+				"0,1","1,2",
+			]);
+			assert.deepEqual(tall.kDigaonal(1), [
+				"0,1",
+			]);
+			assert.deepEqual(wide.kDigaonal(1), [
+				"0,1","1,2",
+			]);
+		});
+		it ("returns -1st diagonal", () => {
+			assert.deepEqual(square.kDigaonal(-1), [
+				"1,0","2,1",
+			]);
+			assert.deepEqual(tall.kDigaonal(-1), [
+				"1,0","2,1",
+			]);
+			assert.deepEqual(wide.kDigaonal(-1), [
+				"1,0",
+			]);
+		});
 	});
 });

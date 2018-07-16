@@ -6,10 +6,6 @@ import {
 	OutOfBoundsError,
 } from "./errors";
 
-interface FromFunctionIterator<T> {
-	(i: number, j: number): T;
-}
-
 export class Matrix<T> {
 	public data: T[];
 	public m: number; // Number of rows
@@ -81,13 +77,13 @@ export class Matrix<T> {
 	private j(n: number): number {
 		return n % this.n;
 	}
-
+	
 	/**
 	 * Populates a matrix with a function that iterates over i and j
-	 * @param  {FromFunctionIterator<T>} callback
+	 * @param  {(i: number, j: number) => T} callback
 	 * @return {Matrix<T>}
 	 */
-	public map(callback: FromFunctionIterator<T>): Matrix<T> {
+	public map(callback: (i: number, j: number) => T): Matrix<T> {
 		const m = this.new
 		m.data = m.data.map((elem, n) => {
 			return callback(this.i(n), this.j(n));
@@ -212,13 +208,10 @@ export class Matrix<T> {
 	}
 
 	public kDigaonal(k: number): T[] {
-		const { m, n } = this;
-		const maxDiagonalSize = (m < n) ? m : n;
-		const diagonal = new Array(maxDiagonalSize)
+		return new Array(this.m)
 			.fill(undefined)
-			.map((_, i) => [i, i])
+			.map((_, i) => [i, i + k])								// Produce main diagonal shifted by k
+			.filter(([_, j]) => j >= 0 && j < this.n)	// Reject out of bounds j
 			.map(([i, j]) => this.get(i, j));
-
-		return diagonal;
 	}
 }
