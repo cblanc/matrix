@@ -181,11 +181,19 @@ export class Matrix<T> {
 		}
 	}
 
+	/**
+	 * Returns transpose of matrix
+	 * @return {Matrix<T>}
+	 */
 	get transpose(): Matrix<T> {
 		return new Matrix<T>(this.n, this.m)
 			.map((i, j) => this.get(j, i));
 	}
 
+	/**
+	 * Human readable string represenation of matrix
+	 * @return {string}
+	 */
 	public toString(): string {
 		const maxLength: number = this.data
 			.map(elem => `${elem}`.length)
@@ -201,12 +209,21 @@ export class Matrix<T> {
 			.join("\n");
 	}
 
+	/**
+	 * Iterates over every element in matrix
+	 * @param {(elem: T, i: number, j:number) => void} cb
+	 */
 	public forEach(cb: (elem: T, i: number, j: number) => void): void {	
 		return this.data.forEach((elem, i) => {
 			cb(elem, Math.floor(i / this.n) ,i % this.n);
 		});
 	}
 
+	/**
+	 * Returns arbitrary diagonal
+	 * @param  {number} k
+	 * @return {T[]}     
+	 */
 	public kDigaonal(k: number): T[] {
 		return new Array(this.m)
 			.fill(undefined)
