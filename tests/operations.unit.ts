@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import { DimensionsNotEqualError } from "../lib/errors";
 import { Matrix } from "../lib/index";
-import { equals, add } from "../lib/operations";
+import { equals, add, subtract } from "../lib/operations";
 
 describe("Matrix operations", () => {
 	describe("equals", () => {
@@ -38,6 +38,23 @@ describe("Matrix operations", () => {
 			const C = new Matrix<number>(2,0).fill(0);
 			assert.throws(() => add(A, B), DimensionsNotEqualError);
 			assert.throws(() => add(A, C), DimensionsNotEqualError);
+		});
+	});
+
+	describe("subtract", () => {
+		it ("subracts two matrices", () => {
+			const A = new Matrix<number>(2,3).fill(3);
+			const B = new Matrix<number>(2,3).fill(2);
+			const C = new Matrix<number>(2,3).fill(1);
+			const R = subtract(A, B);
+			assert.isTrue(R.equals(C));
+		});
+		it ("throws an error if matrices are invalidly size", () => {
+			const A = new Matrix<number>(2,3).fill(0);
+			const B = new Matrix<number>(0,3).fill(0);
+			const C = new Matrix<number>(2,0).fill(0);
+			assert.throws(() => subtract(A, B), DimensionsNotEqualError);
+			assert.throws(() => subtract(A, C), DimensionsNotEqualError);
 		});
 	});
 });
