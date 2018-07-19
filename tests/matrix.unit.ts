@@ -277,4 +277,12 @@ describe("Matrix", () => {
 			assert.deepEqual(tall.diagonal, tall.kDigaonal(0));
 		});
 	});
+
+	describe("equals", () => {
+		it ("aliases to equality method", () => {
+			const A = new Matrix(2,2).fill(0);
+			const B = new Matrix(2,2).fill(0);
+			assert.isTrue(A.equals(B));
+		});
+	});
 });

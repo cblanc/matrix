@@ -1,10 +1,6 @@
-import {
-	padder
-} from "./utils";
-
-import {
-	OutOfBoundsError,
-} from "./errors";
+import { OutOfBoundsError } from "./errors";
+import { equals } from "./operations";
+import { padder } from "./utils";
 
 export class Matrix<T> {
 	public data: T[];
@@ -232,5 +228,14 @@ export class Matrix<T> {
 	 */
 	get diagonal(): T[] {
 		return this.kDigaonal(0);
+	}
+
+	/**
+	 * Checks for equality against matrix M
+	 * @param  {Matrix<T>} M
+	 * @return {boolean}    
+	 */
+	equals(M: Matrix<T>): boolean {
+		return equals(this, M);
 	}
 }
