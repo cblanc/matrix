@@ -1,12 +1,12 @@
 import { assert } from "chai";
 import { OutOfBoundsError } from "../lib/errors";
-import { GenericMatrix } from "../lib/index";
+import { GenericMatrix } from "../lib/generic_matrix";
 
 const randomInt = (n: number): number => Math.floor(Math.random() * n);
 
 const mapCoords = (i:number, j: number): string => `${i},${j}`;
 
-describe("Matrix", () => {
+describe("GenericMatrix", () => {
 	describe("#new", () => {
 		it ("creates a new GenericMatrix instance and assigns empty data", () => {
 			const mat = new GenericMatrix(4, 4);
