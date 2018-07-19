@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import { OutOfBoundsError } from "../lib/errors";
-import { Matrix } from "../lib/index";
+import { GenericMatrix } from "../lib/index";
 
 const randomInt = (n: number): number => Math.floor(Math.random() * n);
 
@@ -8,8 +8,8 @@ const mapCoords = (i:number, j: number): string => `${i},${j}`;
 
 describe("Matrix", () => {
 	describe("#new", () => {
-		it ("creates a new matrix instance and assigns empty data", () => {
-			const mat = new Matrix(4, 4);
+		it ("creates a new GenericMatrix instance and assigns empty data", () => {
+			const mat = new GenericMatrix(4, 4);
 			const mat2 = mat.new;
 			assert.equal(mat.n, mat2.n);
 			assert.equal(mat.m, mat2.m);
@@ -19,7 +19,7 @@ describe("Matrix", () => {
 
 	describe("matrix getter", () => {
 		it ("returns copy of underlying data structure", () => {
-			const mat = new Matrix(2,2);
+			const mat = new GenericMatrix(2,2);
 			const _m = mat.matrix;
 			assert.deepEqual(_m, mat.matrix);
 			assert.notEqual(_m, mat.matrix);
@@ -28,14 +28,14 @@ describe("Matrix", () => {
 
 	describe("matrix setter", () => {
 		it ("assigns matrix", () => {
-			const mat = new Matrix(2,2);
+			const mat = new GenericMatrix(2,2);
 			mat.matrix.forEach(assert.isUndefined.bind(assert));
 			const n = 1;
 			mat.matrix = new Array(4).fill(n);
 			mat.matrix.forEach(e => assert.equal(e, n));
 		});
 		it ("throws if invalid size", () => {
-			const mat = new Matrix(3,2);
+			const mat = new GenericMatrix(3,2);
 			assert.throws(() => {
 				mat.matrix = [1,2];
 			}, Error)
@@ -44,14 +44,14 @@ describe("Matrix", () => {
 
 	describe("#size", () => {
 		it ("returns size of matrix", () => {
-			const mat = new Matrix(8, 7);
+			const mat = new GenericMatrix(8, 7);
 			assert.equal(mat.size, 56);
 		});
 	});
 
 	describe("instantiation", () => {
 		it ("creates a matrix initialised to undefined", () => {
-			const mat = new Matrix(2,3);
+			const mat = new GenericMatrix(2,3);
 			assert.isTrue(mat.data.every(e => e === undefined));
 			assert.equal(mat.data.length, 6);
 			assert.equal(mat.m, 2);
@@ -60,14 +60,14 @@ describe("Matrix", () => {
 
 		describe("#fill", () => {
 			it ("populates all elems with value", () => {
-				const mat = new Matrix(2,3).fill(0);
+				const mat = new GenericMatrix(2,3).fill(0);
 				assert.isTrue(mat.data.every(e => e === 0));
 			});
 		});
 
 		describe("#map", () => {
-			it ("generates a new matrix by iterating over every i and j", () => {
-				const mat = new Matrix<string>(2, 3).map(mapCoords);
+			it ("generates a new GenericMatrix by iterating over every i and j", () => {
+				const mat = new GenericMatrix<string>(2, 3).map(mapCoords);
 				const expected = [
 					"0,0","0,1","0,2",
 					"1,0","1,1","1,2",
@@ -79,13 +79,13 @@ describe("Matrix", () => {
 
 	describe("#iRow", () => {
 		it ("returns i'th row", () => {
-			const mat = new Matrix(3,4).map(i => i);
+			const mat = new GenericMatrix(3,4).map(i => i);
 			assert.deepEqual(mat.iRow(0), [0,0,0,0]);
 			assert.deepEqual(mat.iRow(1), [1,1,1,1]);
 			assert.deepEqual(mat.iRow(2), [2,2,2,2]);
 		});
 		it ("throws if i is out of range", () => {
-			const mat = new Matrix(2,2);
+			const mat = new GenericMatrix(2,2);
 			assert.throws(() => {
 				mat.iRow(2);
 			}, OutOfBoundsError);
@@ -97,13 +97,13 @@ describe("Matrix", () => {
 
 	describe("#jCol", () => {
 		it ("returns j'th row", () => {
-			const mat = new Matrix(3,4).map(i => i);
+			const mat = new GenericMatrix(3,4).map(i => i);
 			assert.deepEqual(mat.jCol(0), [0,1,2]);
 			assert.deepEqual(mat.jCol(1), [0,1,2]);
 			assert.deepEqual(mat.jCol(2), [0,1,2]);
 		});
 		it ("throws if j is out of range", () => {
-			const mat = new Matrix(2,2);
+			const mat = new GenericMatrix(2,2);
 			assert.throws(() => {
 				mat.jCol(2);
 			}, OutOfBoundsError);
@@ -115,7 +115,7 @@ describe("Matrix", () => {
 
 	describe("#rows", () => {
 		it ("returns an array of rows", () => {
-			const m = new Matrix(3,3).map(i => i);
+			const m = new GenericMatrix(3,3).map(i => i);
 			const expected = [
 				[0,0,0],
 				[1,1,1],
@@ -127,7 +127,7 @@ describe("Matrix", () => {
 
 	describe("#columns", () => {
 		it ("returns an array of columns", () => {
-			const m = new Matrix(2,5).map(i => i);
+			const m = new GenericMatrix(2,5).map(i => i);
 			const expected = [
 				[0,1],
 				[0,1],
@@ -140,10 +140,10 @@ describe("Matrix", () => {
 	});
 
 	describe("#get", () => {
-		let mat: Matrix<string>;
+		let mat: GenericMatrix<string>;
 
 		beforeEach(() => {
-			mat = new Matrix<string>(5, 4).map(mapCoords);
+			mat = new GenericMatrix<string>(5, 4).map(mapCoords);
 		});
 
 		it ("retrieves the right value from a matrix given i and j", () => {
@@ -182,7 +182,7 @@ describe("Matrix", () => {
 			// 0,0 1,0
 			// 0,1 1,1 
 			// 0,2 1,2
-			const m1 = new Matrix(2,3).map(mapCoords);
+			const m1 = new GenericMatrix(2,3).map(mapCoords);
 			assert.deepEqual(m1.transpose.rows, [
 				["0,0", "1,0"],
 				["0,1", "1,1"],
@@ -193,7 +193,7 @@ describe("Matrix", () => {
 
 	describe("toString", () => {
 		it ("renders matrix as string", () => {
-			const m = new Matrix(2,3).map((i, j) => Math.pow(10, j) + i);
+			const m = new GenericMatrix(2,3).map((i, j) => Math.pow(10, j) + i);
 			assert.equal(m.toString(), [
 				["  1  10 100"],
 				["  2  11 101"],
@@ -203,7 +203,7 @@ describe("Matrix", () => {
 
 	describe("forEach", () => {
 		it ("iterates over every elem in order (i =0 ...m, left to right)", () => {
-			const m = new Matrix<string>(3,3).map(mapCoords);
+			const m = new GenericMatrix<string>(3,3).map(mapCoords);
 			const elems: string[] = [];
 			const is: number[] = [];
 			const js: number[] = [];
@@ -223,12 +223,12 @@ describe("Matrix", () => {
 	});
 
 	describe("kDiagonal", () => {
-		let square: Matrix<string>, tall: Matrix<string>, wide: Matrix<string>;
+		let square: GenericMatrix<string>, tall: GenericMatrix<string>, wide: GenericMatrix<string>;
 
 		beforeEach(() => {
-			square = new Matrix<string>(3,3).map(mapCoords);
-			tall = new Matrix<string>(3,2).map(mapCoords);
-			wide = new Matrix<string>(2,3).map(mapCoords);
+			square = new GenericMatrix<string>(3,3).map(mapCoords);
+			tall = new GenericMatrix<string>(3,2).map(mapCoords);
+			wide = new GenericMatrix<string>(2,3).map(mapCoords);
 		});
 
 		it ("returns 0th diagonal", () => {
@@ -268,9 +268,9 @@ describe("Matrix", () => {
 
 	describe("diagonal", () => {
 		it ("returns main diagonal", () => {
-			const square = new Matrix<string>(3,3).map(mapCoords);
-			const tall = new Matrix<string>(3,2).map(mapCoords);
-			const wide = new Matrix<string>(2,3).map(mapCoords);
+			const square = new GenericMatrix<string>(3,3).map(mapCoords);
+			const tall = new GenericMatrix<string>(3,2).map(mapCoords);
+			const wide = new GenericMatrix<string>(2,3).map(mapCoords);
 
 			assert.deepEqual(square.diagonal, square.kDigaonal(0));
 			assert.deepEqual(wide.diagonal, wide.kDigaonal(0));
@@ -280,8 +280,8 @@ describe("Matrix", () => {
 
 	describe("equals", () => {
 		it ("aliases to equality method", () => {
-			const A = new Matrix(2,2).fill(0);
-			const B = new Matrix(2,2).fill(0);
+			const A = new GenericMatrix(2,2).fill(0);
+			const B = new GenericMatrix(2,2).fill(0);
 			assert.isTrue(A.equals(B));
 		});
 	});

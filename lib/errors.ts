@@ -1,13 +1,13 @@
-import { Matrix } from "./index";
+import { GenericMatrix } from "./index";
 
 interface OutOfBoundsErrorConstructor {
-	M: Matrix<any>, // Should use unkownn type when this is available in TS 3.0
+	M: GenericMatrix<any>, // Should use unkownn type when this is available in TS 3.0
 	i?: number,
 	j?: number,
 };
 
 export class OutOfBoundsError extends RangeError {
-	public matrix: Matrix<any>;
+	public matrix: GenericMatrix<any>;
 
 	constructor(options: OutOfBoundsErrorConstructor) {
 		const { M, i, j } = options;
@@ -27,8 +27,8 @@ export class OutOfBoundsError extends RangeError {
 }
 
 interface DimensionsNotEqualErrorContructor {
-	A: Matrix<any>,
-	B: Matrix<any>,
+	A: GenericMatrix<any>,
+	B: GenericMatrix<any>,
 };
 
 export class DimensionsNotEqualError extends RangeError {

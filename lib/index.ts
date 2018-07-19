@@ -2,7 +2,7 @@ import { OutOfBoundsError } from "./errors";
 import { equals } from "./operations";
 import { padder } from "./utils";
 
-export class Matrix<T> {
+export class GenericMatrix<T> {
 	public data: T[];
 	public m: number; // Number of rows
 	public n: number; // Number of columns
@@ -23,10 +23,10 @@ export class Matrix<T> {
 
 	/**
 	 * Creates an empty copy of matrix
-	 * @return {Matrix<T>}
+	 * @return {GenericMatrix<T>}
 	 */
-	get new(): Matrix<T> {
-		const m = new Matrix<T>(this.m, this.n);
+	get new(): GenericMatrix<T> {
+		const m = new GenericMatrix<T>(this.m, this.n);
 		m.matrix = this.data.slice(0);
 		return m;
 	}
@@ -77,9 +77,9 @@ export class Matrix<T> {
 	/**
 	 * Populates a matrix with a function that iterates over i and j
 	 * @param  {(i: number, j: number) => T} callback
-	 * @return {Matrix<T>}
+	 * @return {GenericMatrix<T>}
 	 */
-	public map(callback: (i: number, j: number) => T): Matrix<T> {
+	public map(callback: (i: number, j: number) => T): GenericMatrix<T> {
 		const m = this.new
 		m.data = m.data.map((elem, n) => {
 			return callback(this.i(n), this.j(n));
@@ -90,9 +90,9 @@ export class Matrix<T> {
 	/**
 	 * Fills all elems in matrix with value
 	 * @param  {T}         value
-	 * @return {Matrix<T>}
+	 * @return {GenericMatrix<T>}
 	 */
-	public fill(value: T): Matrix<T> {
+	public fill(value: T): GenericMatrix<T> {
 		const m = this.new.map(() => value);
 		return m;
 	}
@@ -173,10 +173,10 @@ export class Matrix<T> {
 
 	/**
 	 * Returns transpose of matrix
-	 * @return {Matrix<T>}
+	 * @return {GenericMatrix<T>}
 	 */
-	get transpose(): Matrix<T> {
-		return new Matrix<T>(this.n, this.m)
+	get transpose(): GenericMatrix<T> {
+		return new GenericMatrix<T>(this.n, this.m)
 			.map((i, j) => this.get(j, i));
 	}
 
@@ -232,10 +232,10 @@ export class Matrix<T> {
 
 	/**
 	 * Checks for equality against matrix M
-	 * @param  {Matrix<T>} M
+	 * @param  {GenericMatrix<T>} M
 	 * @return {boolean}    
 	 */
-	equals(M: Matrix<T>): boolean {
+	equals(M: GenericMatrix<T>): boolean {
 		return equals(this, M);
 	}
 }
