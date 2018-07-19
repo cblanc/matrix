@@ -2,6 +2,16 @@ import { DimensionsNotEqualError } from "./errors";
 import { Matrix } from "./index";
 
 /**
+ * Adds two matrices
+ * @type {[type]}
+ */
+export const add = (A: Matrix<number>, B: Matrix<number>): Matrix<number> => {
+	assertEqualDimensions(A, B);
+	return new Matrix<number>(A.m, A.n)
+		.map((i, j) => A.get(i, j) + B.get(i, j));
+};
+
+/**
  * Compares two matrices
  * @type {[type]}
  */
