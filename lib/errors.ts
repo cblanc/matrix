@@ -25,3 +25,22 @@ export class OutOfBoundsError extends RangeError {
 		this.matrix = M;
 	}	
 }
+
+interface DimensionsNotEqualErrorContructor {
+	A: Matrix<any>,
+	B: Matrix<any>,
+};
+
+export class DimensionsNotEqualError extends RangeError {
+	constructor(options: DimensionsNotEqualErrorContructor) {
+		const { A, B } = options;
+		const msg = [
+			"Unable to perform operation due to invalid dimensions.",
+			"Expected both matrices to be of equal size,",
+			`however A is ${A.m} by ${A.n},`,
+			`and B is ${B.m} by ${B.n}`
+		].join(" ");
+		super(msg);
+		Object.setPrototypeOf(this, new.target.prototype);
+	}
+};
