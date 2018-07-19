@@ -9,20 +9,20 @@
 ## Instantiation
 
 ```javascript
-import { matrix } from "@cablanchard/matrix";
+import { GenericMatrix, Matrix } from "@cablanchard/matrix";
 
-const m = new Matrix(2,3); // Create 2x3 matrix
+const m = new Matrix(2,3); // Create 2x3 numeric matrix
 
 // [
-// 	undefined, undefined, undefined,
-//   undefined, undefined, undefined,
+// 	0, 0, 0,
+//  0, 0, 0,
 // ]
 
-const m = new Matrix(2, 2).fill(0);
+const m = new Matrix(2, 2).fill(1);
 
 // [
-// 	0, 0,
-//  0, 0,
+// 	1, 1,
+//  1, 1,
 // ]
 
 Matrix(2, 2).map((i, j) => i)
@@ -30,6 +30,13 @@ Matrix(2, 2).map((i, j) => i)
 // [
 // 	0, 0,
 //  1, 1,
+// ]
+
+const m = new GenericMatrix(2,3); // In case a generic solution is required
+
+// [
+// 	undefined, undefined, undefined,
+//   undefined, undefined, undefined,
 // ]
 ```
 
