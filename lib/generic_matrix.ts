@@ -239,7 +239,3 @@ export class GenericMatrix<T> {
 		return equals(this, M);
 	}
 }
-
-export class Matrix extends GenericMatrix<number> {
-	
-}
