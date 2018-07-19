@@ -164,10 +164,7 @@ export class Matrix<T> {
 	 * @param {number} i
 	 */
 	private checkI(i: number): void {
-		const { m, n } = this;
-		if (i < 0 || i >= m) {
-			throw new OutOfBoundsError(`Cannot access i=${i} of a ${m}x${n} matrix`);
-		}
+		if (i < 0 || i >= this.m) throw new OutOfBoundsError({ i, M: this });
 	}
 
 	/**
@@ -175,10 +172,7 @@ export class Matrix<T> {
 	 * @param {number} j
 	 */
 	private checkJ(j: number): void {
-		const { m, n } = this;
-		if (j < 0 || j >= n) {
-			throw new OutOfBoundsError(`Cannot access j=${j} of a ${m}x${n} matrix`);
-		}
+		if (j < 0 || j >= this.n) throw new OutOfBoundsError({ j, M: this });
 	}
 
 	/**

@@ -1,10 +1,6 @@
 import { assert } from "chai";
-import {
-	OutOfBoundsError
-} from "../lib/errors";
-import {
-	Matrix,
-} from "../lib/index";
+import { OutOfBoundsError } from "../lib/errors";
+import { Matrix } from "../lib/index";
 
 const randomInt = (n: number): number => Math.floor(Math.random() * n);
 
@@ -92,10 +88,10 @@ describe("Matrix", () => {
 			const mat = new Matrix(2,2);
 			assert.throws(() => {
 				mat.iRow(2);
-			}, RangeError);
+			}, OutOfBoundsError);
 			assert.throws(() => {
 				mat.iRow(-1);
-			}, RangeError);
+			}, OutOfBoundsError);
 		});
 	});
 
@@ -110,10 +106,10 @@ describe("Matrix", () => {
 			const mat = new Matrix(2,2);
 			assert.throws(() => {
 				mat.jCol(2);
-			}, RangeError);
+			}, OutOfBoundsError);
 			assert.throws(() => {
 				mat.jCol(-1);
-			}, RangeError);
+			}, OutOfBoundsError);
 		});
 	});
 
@@ -161,19 +157,19 @@ describe("Matrix", () => {
 		it ("throws if i out of bounds", () => {
 			assert.throws(() => {
 				mat.get(5,2);
-			}, RangeError);
+			}, OutOfBoundsError);
 			assert.throws(() => {
 				mat.get(-1,2);
-			}, RangeError);
+			}, OutOfBoundsError);
 		});
 
 		it ("throws if j out of bounds", () => {
 			assert.throws(() => {
 				mat.get(2,4);
-			}, RangeError);
+			}, OutOfBoundsError);
 			assert.throws(() => {
 				mat.get(2,-1);
-			}, RangeError);
+			}, OutOfBoundsError);
 		});
 	});
 
@@ -280,6 +276,5 @@ describe("Matrix", () => {
 			assert.deepEqual(wide.diagonal, wide.kDigaonal(0));
 			assert.deepEqual(tall.diagonal, tall.kDigaonal(0));
 		});
-	})
-
+	});
 });
