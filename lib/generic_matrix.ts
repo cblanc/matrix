@@ -82,7 +82,6 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 
 	/**
 	 * Returns a copy of internal datastructure
-	 * @return {T[]}
 	 */
 	get matrix() {
 		return this.data.slice(0);
@@ -125,8 +124,7 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	
 	/**
 	 * Populates a matrix with a function that iterates over i and j
-	 * @param  {(i: number, j: number) => T} callback
-	 * @return {GenericMatrix<T>}
+	 * @param {MatrixMapIterator<T>} fn
 	 */
 	public map(fn: MatrixMapIterator<T>) {
 		const m = this.new
@@ -136,20 +134,18 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 
 	/**
 	 * Fills all elems in matrix with value
-	 * @param  {T}         value
-	 * @return {GenericMatrix<T>}
+	 * @param {T} value [description]
 	 */
 	public fill(value: T) {
 		const m = this.new.map(() => value);
 		return m;
 	}
 
-	/**
-	 * Returns ith row
-	 * @param  {number} i
-	 * @return {T[]}
-	 */
-	public iRow(i: number): T[] {
+	 /**
+	  * Returns ith row
+	  * @param {number} i
+	  */
+	public iRow(i: number) {
 		this.checkI(i);
 		const { n } = this;
 		const min = i * n;
@@ -157,12 +153,11 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 		return this.data.slice(min, max);
 	}
 
-	/**
-	 * Returns j'th column
-	 * @param  {number} j
-	 * @return {T[]}
-	 */
-	public jCol(j: number): T[] {
+ /**
+  * Returns j'th column
+  * @param {number} j
+  */
+	public jCol(j: number) {
 		this.checkJ(j);
 		const { m, n } = this;
 		return new Array(m)
@@ -172,17 +167,15 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 
 	/**
 	 * Returns an array of rows size m
-	 * @return {T[]}
 	 */
 	get rows() {
 		return new Array(this.m)
 			.fill(undefined)
 			.map((_, i) => this.iRow(i));
 	}
-
+	
 	/**
 	 * Returns an array of columns size n
-	 * @return {T[]}
 	 */
 	get columns() {
 		return new Array(this.n)
@@ -192,9 +185,8 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 
 	/**
 	 * Retrives value at position i,j
-	 * @param  {number} i
-	 * @param  {number} j
-	 * @return {T}
+	 * @param {number} i [description]
+	 * @param {number} j [description]
 	 */
 	public get(i: number, j: number) {
 		this.checkI(i);
@@ -220,7 +212,6 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 
 	/**
 	 * Returns transpose of matrix
-	 * @return {GenericMatrix<T>}
 	 */
 	get transpose() {
 		return new GenericMatrix<T>(this.n, this.m)
@@ -229,9 +220,8 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 
 	/**
 	 * Human readable string represenation of matrix
-	 * @return {string}
 	 */
-	public toString(): string {
+	public toString() {
 		const maxLength: number = this.data
 			.map(elem => `${elem}`.length)
 			.reduce((prev, curr) => {
@@ -248,9 +238,9 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 
 	/**
 	 * Iterates over every element in matrix
-	 * @param {(elem: T, i: number, j:number) => void} cb
+	 * @param {MatrixForEachIterator<T>} cb
 	 */
-	public forEach(cb: (elem: T, i: number, j: number) => void): void {	
+	public forEach(cb: MatrixForEachIterator<T>): void {	
 		return this.data.forEach((elem, i) => {
 			cb(elem, Math.floor(i / this.n) ,i % this.n);
 		});
@@ -271,7 +261,6 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 
 	/**
 	 * Returns 0th digaonal
-	 * @return {T[]} [description]
 	 */
 	get diagonal() {
 		return this.kDigaonal(0);
