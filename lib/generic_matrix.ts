@@ -26,6 +26,14 @@ interface StringifyFuntion {
 	(): string;
 }
 
+interface MatrixForEachFunction<T> {
+	(fn: MatrixForEachIterator<T>): void;
+}
+
+interface MatrixForEachIterator<T> {
+	(elem: T, i: number, j: number): void;
+}
+
 interface GenericMatrixInterface<T> {
 	size: number;
 	new: GenericMatrixInterface<T>;
@@ -39,6 +47,8 @@ interface GenericMatrixInterface<T> {
 	get: ElementFunction<T>;
 	transpose: GenericMatrixInterface<T>;
 	toString: StringifyFuntion;
+	diagonal: T[];
+	forEach: MatrixForEachFunction<T>;
 }
 
 export class GenericMatrix<T> implements GenericMatrixInterface<T> {
@@ -263,7 +273,7 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	 * Returns 0th digaonal
 	 * @return {T[]} [description]
 	 */
-	get diagonal(): T[] {
+	get diagonal() {
 		return this.kDigaonal(0);
 	}
 
