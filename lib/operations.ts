@@ -1,24 +1,23 @@
 import { DimensionsNotEqualError } from "./errors";
-import { GenericMatrix } from "./index";
+import { GenericMatrix, Matrix } from "./index";
 
 /**
  * Adds two matrices
  * @type {[type]}
  */
-export const add = (A: GenericMatrix<number>, B: GenericMatrix<number>): GenericMatrix<number> => {
+export const add = (A: Matrix, B: Matrix): Matrix => {
 	assertEqualDimensions(A, B);
-	return new GenericMatrix<number>(A.m, A.n)
+	return new Matrix(A.m, A.n)
 		.map((i, j) => A.get(i, j) + B.get(i, j));
 };
-
 
 /**
  * Subtracts Matrix B from Matrix A
  * @type {[type]}
  */
-export const subtract = (A: GenericMatrix<number>, B: GenericMatrix<number>): GenericMatrix<number> => {
+export const subtract = (A: Matrix, B: Matrix): Matrix => {
 	assertEqualDimensions(A, B);
-	return new GenericMatrix<number>(A.m, A.n)
+	return new Matrix(A.m, A.n)
 		.map((i, j) => A.get(i, j) - B.get(i, j));
 };
 
