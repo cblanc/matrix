@@ -251,7 +251,7 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	 * @param  {number} k
 	 * @return {T[]}     
 	 */
-	public kDigaonal(k: number): T[] {
+	public kDiagonal(k: number): T[] {
 		return new Array(this.m)
 			.fill(undefined)
 			.map((_, i) => [i, i + k])								// Produce main diagonal shifted by k
@@ -263,7 +263,7 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	 * Returns 0th digaonal
 	 */
 	get diagonal() {
-		return this.kDigaonal(0);
+		return this.kDiagonal(0);
 	}
 
 	/**

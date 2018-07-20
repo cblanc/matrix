@@ -232,35 +232,35 @@ describe("GenericMatrix", () => {
 		});
 
 		it ("returns 0th diagonal", () => {
-			assert.deepEqual(square.kDigaonal(0), [
+			assert.deepEqual(square.kDiagonal(0), [
 				"0,0","1,1","2,2",
 			]);
-			assert.deepEqual(tall.kDigaonal(0), [
+			assert.deepEqual(tall.kDiagonal(0), [
 				"0,0","1,1",
 			]);
-			assert.deepEqual(wide.kDigaonal(0), [
+			assert.deepEqual(wide.kDiagonal(0), [
 				"0,0","1,1",
 			]);
 		});
 		it ("returns 1st diagonal", () => {
-			assert.deepEqual(square.kDigaonal(1), [
+			assert.deepEqual(square.kDiagonal(1), [
 				"0,1","1,2",
 			]);
-			assert.deepEqual(tall.kDigaonal(1), [
+			assert.deepEqual(tall.kDiagonal(1), [
 				"0,1",
 			]);
-			assert.deepEqual(wide.kDigaonal(1), [
+			assert.deepEqual(wide.kDiagonal(1), [
 				"0,1","1,2",
 			]);
 		});
 		it ("returns -1st diagonal", () => {
-			assert.deepEqual(square.kDigaonal(-1), [
+			assert.deepEqual(square.kDiagonal(-1), [
 				"1,0","2,1",
 			]);
-			assert.deepEqual(tall.kDigaonal(-1), [
+			assert.deepEqual(tall.kDiagonal(-1), [
 				"1,0","2,1",
 			]);
-			assert.deepEqual(wide.kDigaonal(-1), [
+			assert.deepEqual(wide.kDiagonal(-1), [
 				"1,0",
 			]);
 		});
@@ -272,9 +272,9 @@ describe("GenericMatrix", () => {
 			const tall = new GenericMatrix<string>(3,2).map(mapCoords);
 			const wide = new GenericMatrix<string>(2,3).map(mapCoords);
 
-			assert.deepEqual(square.diagonal, square.kDigaonal(0));
-			assert.deepEqual(wide.diagonal, wide.kDigaonal(0));
-			assert.deepEqual(tall.diagonal, tall.kDigaonal(0));
+			assert.deepEqual(square.diagonal, square.kDiagonal(0));
+			assert.deepEqual(wide.diagonal, wide.kDiagonal(0));
+			assert.deepEqual(tall.diagonal, tall.kDiagonal(0));
 		});
 	});
 
