@@ -34,6 +34,10 @@ interface MatrixForEachIterator<T> {
 	(elem: T, i: number, j: number): void;
 }
 
+interface KDiagonalFunction<T> {
+	(k: number): T[];
+}
+
 interface GenericMatrixInterface<T> {
 	size: number;
 	new: GenericMatrixInterface<T>;
@@ -48,6 +52,7 @@ interface GenericMatrixInterface<T> {
 	transpose: GenericMatrixInterface<T>;
 	toString: StringifyFuntion;
 	diagonal: T[];
+	kDiagonal: KDiagonalFunction<T>;
 	forEach: MatrixForEachFunction<T>;
 }
 
@@ -248,10 +253,9 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 
 	/**
 	 * Returns arbitrary diagonal
-	 * @param  {number} k
-	 * @return {T[]}     
+	 * @param {number} k
 	 */
-	public kDiagonal(k: number): T[] {
+	public kDiagonal(k: number) {
 		return new Array(this.m)
 			.fill(undefined)
 			.map((_, i) => [i, i + k])								// Produce main diagonal shifted by k
