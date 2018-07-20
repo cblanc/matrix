@@ -1,4 +1,4 @@
-import { GenericMatrix } from "./index";
+import { GenericMatrix } from "./generic_matrix";
 
 interface OutOfBoundsErrorConstructor {
 	M: GenericMatrix<any>, // Should use unkownn type when this is available in TS 3.0

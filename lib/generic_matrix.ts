@@ -2,7 +2,46 @@ import { OutOfBoundsError } from "./errors";
 import { equals } from "./operations";
 import { padder } from "./utils";
 
-export class GenericMatrix<T> {
+interface MatrixMapFunction<T> {
+	(fn: MatrixMapIterator<T>): GenericMatrixInterface<T>;
+}
+
+interface MatrixFillFunction<T> {
+	(value: T): GenericMatrixInterface<T>;
+}
+
+interface VectorFunction<T> {
+	(n: number): T[];
+}
+
+interface MatrixMapIterator<T> {
+	(i: number, j: number): T;
+}
+
+interface ElementFunction<T> {
+	(i: number, j: number): T;
+}
+
+interface StringifyFuntion {
+	(): string;
+}
+
+interface GenericMatrixInterface<T> {
+	size: number;
+	new: GenericMatrixInterface<T>;
+	matrix: T[];
+	map: MatrixMapFunction<T>;
+	fill: MatrixFillFunction<T>;
+	iRow: VectorFunction<T>;
+	jCol: VectorFunction<T>;
+	rows: T[][];
+	columns: T[][];
+	get: ElementFunction<T>;
+	transpose: GenericMatrixInterface<T>;
+	toString: StringifyFuntion;
+}
+
+export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	public data: T[];
 	public m: number; // Number of rows
 	public n: number; // Number of columns
@@ -17,7 +56,7 @@ export class GenericMatrix<T> {
 	 * Returns m*n size of matrix
 	 * @return {number}
 	 */
-	get size(): number {
+	get size() {
 		return this.m * this.n;
 	}
 
@@ -25,7 +64,7 @@ export class GenericMatrix<T> {
 	 * Creates an empty copy of matrix
 	 * @return {GenericMatrix<T>}
 	 */
-	get new(): GenericMatrix<T> {
+	get new() {
 		const m = new GenericMatrix<T>(this.m, this.n);
 		m.matrix = this.data.slice(0);
 		return m;
@@ -35,7 +74,7 @@ export class GenericMatrix<T> {
 	 * Returns a copy of internal datastructure
 	 * @return {T[]}
 	 */
-	get matrix(): T[] {
+	get matrix() {
 		return this.data.slice(0);
 	}
 
@@ -43,7 +82,7 @@ export class GenericMatrix<T> {
 	 * Sets underlying data structure
 	 * @param {T[]} data
 	 */
-	set matrix(data: T[]) {
+	set matrix(data) {
 		const { size } = this;
 		if (data.length !== this.size) {
 			const { m, n } = this;
@@ -79,11 +118,9 @@ export class GenericMatrix<T> {
 	 * @param  {(i: number, j: number) => T} callback
 	 * @return {GenericMatrix<T>}
 	 */
-	public map(callback: (i: number, j: number) => T): GenericMatrix<T> {
+	public map(fn: MatrixMapIterator<T>) {
 		const m = this.new
-		m.data = m.data.map((elem, n) => {
-			return callback(this.i(n), this.j(n));
-		});
+		m.data = m.data.map((elem, n) => fn(this.i(n), this.j(n)));
 		return m;
 	}
 
@@ -92,7 +129,7 @@ export class GenericMatrix<T> {
 	 * @param  {T}         value
 	 * @return {GenericMatrix<T>}
 	 */
-	public fill(value: T): GenericMatrix<T> {
+	public fill(value: T) {
 		const m = this.new.map(() => value);
 		return m;
 	}
@@ -127,7 +164,7 @@ export class GenericMatrix<T> {
 	 * Returns an array of rows size m
 	 * @return {T[]}
 	 */
-	get rows(): T[][] {
+	get rows() {
 		return new Array(this.m)
 			.fill(undefined)
 			.map((_, i) => this.iRow(i));
@@ -137,7 +174,7 @@ export class GenericMatrix<T> {
 	 * Returns an array of columns size n
 	 * @return {T[]}
 	 */
-	get columns(): T[][] {
+	get columns() {
 		return new Array(this.n)
 			.fill(undefined)
 			.map((_, j) => this.jCol(j));
@@ -149,7 +186,7 @@ export class GenericMatrix<T> {
 	 * @param  {number} j
 	 * @return {T}
 	 */
-	public get(i: number, j: number): T {
+	public get(i: number, j: number) {
 		this.checkI(i);
 		this.checkJ(j);
 		return this.iRow(i)[j];
@@ -175,7 +212,7 @@ export class GenericMatrix<T> {
 	 * Returns transpose of matrix
 	 * @return {GenericMatrix<T>}
 	 */
-	get transpose(): GenericMatrix<T> {
+	get transpose() {
 		return new GenericMatrix<T>(this.n, this.m)
 			.map((i, j) => this.get(j, i));
 	}
