@@ -17,4 +17,13 @@ describe("Matrix", () => {
 			assert.isTrue(A.add(B).equals(C));
 		});
 	});
+
+	describe("#subtract", () => {
+		it ("subtracts with matrix", () => {
+			const A = new Matrix(2,3).fill(3);
+			const B = new Matrix(2,3).fill(2);
+			const C = new Matrix(2,3).fill(1);
+			assert.isTrue(A.subtract(B).equals(C));
+		});
+	});
 });
