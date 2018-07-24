@@ -4,7 +4,7 @@ import { GenericMatrix } from "../lib/generic_matrix";
 
 const randomInt = (n: number): number => Math.floor(Math.random() * n);
 
-const mapCoords = (i:number, j: number): string => `${i},${j}`;
+const mapCoords = (_: any, i:number, j: number): string => `${i},${j}`;
 
 describe("GenericMatrix", () => {
 	describe("#clone", () => {
@@ -61,7 +61,7 @@ describe("GenericMatrix", () => {
 		describe("#fill", () => {
 			it ("populates all elems with value", () => {
 				const mat = new GenericMatrix(2,3).fill(0);
-				assert.isTrue(mat.data.every(e => e === 0));
+				assert.isTrue(mat.data.every((e: number) => e === 0));
 			});
 		});
 
@@ -79,7 +79,7 @@ describe("GenericMatrix", () => {
 
 	describe("#iRow", () => {
 		it ("returns i'th row", () => {
-			const mat = new GenericMatrix(3,4).map(i => i);
+			const mat = new GenericMatrix(3,4).map((_, i) => i);
 			assert.deepEqual(mat.iRow(0), [0,0,0,0]);
 			assert.deepEqual(mat.iRow(1), [1,1,1,1]);
 			assert.deepEqual(mat.iRow(2), [2,2,2,2]);
@@ -97,7 +97,7 @@ describe("GenericMatrix", () => {
 
 	describe("#jCol", () => {
 		it ("returns j'th row", () => {
-			const mat = new GenericMatrix(3,4).map(i => i);
+			const mat = new GenericMatrix(3,4).map((_, i) => i);
 			assert.deepEqual(mat.jCol(0), [0,1,2]);
 			assert.deepEqual(mat.jCol(1), [0,1,2]);
 			assert.deepEqual(mat.jCol(2), [0,1,2]);
@@ -115,7 +115,7 @@ describe("GenericMatrix", () => {
 
 	describe("#rows", () => {
 		it ("returns an array of rows", () => {
-			const m = new GenericMatrix(3,3).map(i => i);
+			const m = new GenericMatrix(3,3).map((_, i) => i);
 			const expected = [
 				[0,0,0],
 				[1,1,1],
@@ -127,7 +127,7 @@ describe("GenericMatrix", () => {
 
 	describe("#columns", () => {
 		it ("returns an array of columns", () => {
-			const m = new GenericMatrix(2,5).map(i => i);
+			const m = new GenericMatrix(2,5).map((_, i) => i);
 			const expected = [
 				[0,1],
 				[0,1],
@@ -193,7 +193,8 @@ describe("GenericMatrix", () => {
 
 	describe("toString", () => {
 		it ("renders matrix as string", () => {
-			const m = new GenericMatrix(2,3).map((i, j) => Math.pow(10, j) + i);
+			const m = new GenericMatrix<number>(2,3)
+				.map((_: number, i: number, j: number) => Math.pow(10, j) + i);
 			assert.equal(m.toString(), [
 				["  1  10 100"],
 				["  2  11 101"],
@@ -207,7 +208,7 @@ describe("GenericMatrix", () => {
 			const elems: string[] = [];
 			const is: number[] = [];
 			const js: number[] = [];
-			m.forEach((elem, i, j) => {
+			m.forEach((elem: string, i: number, j: number) => {
 				elems.push(elem);
 				is.push(i);
 				js.push(j);

@@ -11,7 +11,7 @@ interface VectorFunction<T> {
 }
 
 export interface MapIterator<T> {
-	(i: number, j: number): T;
+	(elem: T, i: number, j: number): T;
 }
 
 interface ElementFunction<T> {

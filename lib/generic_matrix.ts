@@ -84,7 +84,7 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	 */
 	public map(fn: MapIterator<T>) {
 		const m = this.clone();
-		m.data = m.data.map((elem: T, n: number) => fn(this.i(n), this.j(n)));
+		m.data = m.data.map((elem: T, n: number) => fn(elem, this.i(n), this.j(n)));
 		return m;
 	}
 
@@ -170,7 +170,7 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	 */
 	get transpose() {
 		return new (this.constructor as any)(this.n, this.m)
-			.map((i: number, j: number) => this.get(j, i));
+			.map((_: T, i: number, j: number) => this.get(j, i));
 	}
 
 	/**
