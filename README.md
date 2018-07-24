@@ -12,31 +12,27 @@
 import { GenericMatrix, Matrix } from "@cablanchard/matrix";
 
 const M = new Matrix(2,3); // Create 2x3 numeric matrix
-
 // [
 // 	0, 0, 0,
 //  0, 0, 0,
 // ]
 
 const M = new Matrix(2, 2).fill(1);
-
 // [
 // 	1, 1,
 //  1, 1,
 // ]
 
-Matrix(2, 2).map((i, j) => i)
-
+Matrix(2, 2).map((elem, i, j) => i)
 // [
 // 	0, 0,
 //  1, 1,
 // ]
 
 const M = new GenericMatrix(2,3); // In case a generic solution is required
-
 // [
 // 	undefined, undefined, undefined,
-//   undefined, undefined, undefined,
+//  undefined, undefined, undefined,
 // ]
 ```
 
