@@ -30,7 +30,7 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	 * Creates an empty copy of matrix
 	 * @return {GenericMatrix<T>}
 	 */
-	get new() {
+	clone() {
 		const m = new GenericMatrix<T>(this.m, this.n);
 		m.matrix = this.data.slice(0);
 		return m;
@@ -83,7 +83,7 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	 * @param {MatrixMapIterator<T>} fn
 	 */
 	public map(fn: MatrixMapIterator<T>) {
-		const m = this.new
+		const m = this.clone();
 		m.data = m.data.map((elem, n) => fn(this.i(n), this.j(n)));
 		return m;
 	}
@@ -93,7 +93,7 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	 * @param {T} value [description]
 	 */
 	public fill(value: T) {
-		const m = this.new.map(() => value);
+		const m = this.clone().map(() => value);
 		return m;
 	}
 

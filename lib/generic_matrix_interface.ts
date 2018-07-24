@@ -34,9 +34,13 @@ interface KDiagonalFunction<T> {
 	(k: number): T[];
 }
 
+interface CloneFunction<T> {
+	(): GenericMatrixInterface<T>;
+}
+
 export interface GenericMatrixInterface<T> {
 	size: number;
-	new: GenericMatrixInterface<T>;
+	clone: CloneFunction<T>;
 	matrix: T[];
 	map: MatrixMapFunction<T>;
 	fill: MatrixFillFunction<T>;

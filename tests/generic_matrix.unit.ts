@@ -7,10 +7,10 @@ const randomInt = (n: number): number => Math.floor(Math.random() * n);
 const mapCoords = (i:number, j: number): string => `${i},${j}`;
 
 describe("GenericMatrix", () => {
-	describe("#new", () => {
+	describe("#clone", () => {
 		it ("creates a new GenericMatrix instance and assigns empty data", () => {
 			const mat = new GenericMatrix(4, 4);
-			const mat2 = mat.new;
+			const mat2 = mat.clone();
 			assert.equal(mat.n, mat2.n);
 			assert.equal(mat.m, mat2.m);
 			assert.notEqual(mat, mat2);
