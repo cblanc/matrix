@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import { DimensionsNotEqualError } from "../lib/errors";
 import { GenericMatrix, Matrix } from "../lib/index";
-import { equals, add, subtract } from "../lib/operations";
+import { equals, add, subtract, scalarProduct } from "../lib/operations";
 
 describe("Matrix operations", () => {
 	describe("equals", () => {
@@ -57,4 +57,21 @@ describe("Matrix operations", () => {
 			assert.throws(() => subtract(A, C), DimensionsNotEqualError);
 		});
 	});
+
+	describe("scalarProduct", () => {
+		it ("scales a matrix", () => {
+			const A = new Matrix(2,3).fill(1);
+			const B = new Matrix(2,3).fill(3);
+			const C = new Matrix(2,3).fill(6);
+			const D = new Matrix(2,3).fill(0);
+			const R1 = scalarProduct(A, 3);
+			assert.isTrue(equals(B, R1));
+
+			const R2 = scalarProduct(B, 2);
+			assert.isTrue(equals(C, R2));
+
+			const R3 = scalarProduct(C, 0);
+			assert.isTrue(equals(D, R3));
+		});
+	})
 });

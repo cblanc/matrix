@@ -3,7 +3,6 @@ import { GenericMatrix, Matrix } from "./index";
 
 /**
  * Adds two matrices
- * @type {[type]}
  */
 export const add = (A: Matrix, B: Matrix): Matrix => {
 	assertEqualDimensions(A, B);
@@ -13,7 +12,6 @@ export const add = (A: Matrix, B: Matrix): Matrix => {
 
 /**
  * Subtracts Matrix B from Matrix A
- * @type {[type]}
  */
 export const subtract = (A: Matrix, B: Matrix): Matrix => {
 	assertEqualDimensions(A, B);
@@ -23,7 +21,6 @@ export const subtract = (A: Matrix, B: Matrix): Matrix => {
 
 /**
  * Compares two matrices
- * @type {[type]}
  */
 export const equals = <T>(A: GenericMatrix<T>, B: GenericMatrix<T>): boolean => {
 	assertEqualDimensions(A, B);
@@ -32,9 +29,13 @@ export const equals = <T>(A: GenericMatrix<T>, B: GenericMatrix<T>): boolean => 
 
 /**
  * Throws if matrices do not have equal dimensions
- * @type {[type]}
  */
 const assertEqualDimensions = <T>(A: GenericMatrix<T>, B: GenericMatrix<T>): void => {
 	if (A.m !== B.m) throw new DimensionsNotEqualError({ A, B });
 	if (A.n !== B.n) throw new DimensionsNotEqualError({ A, B });
 };
+
+/**
+ * Scales matrix by factor n
+ */
+export const scalarProduct = (A: Matrix, n: number): Matrix => A.map(e => e * n);

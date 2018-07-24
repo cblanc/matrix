@@ -67,8 +67,8 @@ Throws if 2 matrices are incompatible
 ```javascript
 M.add(N)
 M.subtract(N) // Subtracts N from M
-M.mutiply(N)
-M.resize(m, n)
+M.multiply(N)
+M.scale(n)		// Scale by factor n
 ```
 
 ## Utils

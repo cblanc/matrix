@@ -26,4 +26,12 @@ describe("Matrix", () => {
 			assert.isTrue(A.subtract(B).equals(C));
 		});
 	});
+
+	describe("#scale", () => {
+		it ("scales matrix", () => {
+			const A = new Matrix(8,2).fill(3)
+			const B = new Matrix(8,2).fill(12)
+			assert.isTrue(A.scale(4).equals(B));
+		});
+	});
 });

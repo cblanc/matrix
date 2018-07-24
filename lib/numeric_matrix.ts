@@ -1,5 +1,9 @@
 import { GenericMatrix } from "./generic_matrix";
-import { add, subtract } from "./operations";
+import { 
+	add,
+	scalarProduct,
+	subtract,
+} from "./operations";
 
 export class Matrix extends GenericMatrix<number> {
 	constructor(m: number, n: number) {
@@ -13,5 +17,9 @@ export class Matrix extends GenericMatrix<number> {
 
 	subtract(M: Matrix): Matrix {
 		return subtract(this, M);
+	}
+
+	scale(n: number): Matrix {
+		return scalarProduct(this, n);
 	}
 }
