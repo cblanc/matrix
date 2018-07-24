@@ -169,8 +169,8 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	 * Returns transpose of matrix
 	 */
 	get transpose() {
-		return new GenericMatrix<T>(this.n, this.m)
-			.map((i, j) => this.get(j, i));
+		return new (this.constructor as any)(this.n, this.m)
+			.map((i: number, j: number) => this.get(j, i));
 	}
 
 	/**
