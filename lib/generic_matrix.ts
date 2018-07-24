@@ -1,8 +1,8 @@
 import { OutOfBoundsError } from "./errors";
 import { 
+	ForEachIterator,
 	GenericMatrixInterface,
-	MatrixForEachIterator,
-	MatrixMapIterator,
+	MapIterator,
 } from "./generic_matrix_interface";
 import { equals } from "./operations";
 import { padder } from "./utils";
@@ -80,9 +80,9 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	
 	/**
 	 * Populates a matrix with a function that iterates over i and j
-	 * @param {MatrixMapIterator<T>} fn
+	 * @param {MapIterator<T>} fn
 	 */
-	public map(fn: MatrixMapIterator<T>) {
+	public map(fn: MapIterator<T>) {
 		const m = this.clone();
 		m.data = m.data.map((elem: T, n: number) => fn(this.i(n), this.j(n)));
 		return m;
@@ -193,9 +193,9 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 
 	/**
 	 * Iterates over every element in matrix
-	 * @param {MatrixForEachIterator<T>} cb
+	 * @param {ForEachIterator<T>} cb
 	 */
-	public forEach(cb: MatrixForEachIterator<T>): void {	
+	public forEach(cb: ForEachIterator<T>): void {	
 		return this.data.forEach((elem, i) => {
 			cb(elem, Math.floor(i / this.n) ,i % this.n);
 		});
