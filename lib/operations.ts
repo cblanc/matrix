@@ -6,8 +6,7 @@ import { GenericMatrix, Matrix } from "./index";
  */
 export const add = (A: Matrix, B: Matrix): Matrix => {
 	assertEqualDimensions(A, B);
-	return new Matrix(A.m, A.n)
-		.map((i, j) => A.get(i, j) + B.get(i, j));
+	return A.map((elem, i, j) => elem + B.get(i, j));
 };
 
 /**
@@ -15,8 +14,7 @@ export const add = (A: Matrix, B: Matrix): Matrix => {
  */
 export const subtract = (A: Matrix, B: Matrix): Matrix => {
 	assertEqualDimensions(A, B);
-	return new Matrix(A.m, A.n)
-		.map((i, j) => A.get(i, j) - B.get(i, j));
+	return add(A, scalarProduct(B, -1));
 };
 
 /**
@@ -38,4 +36,4 @@ const assertEqualDimensions = <T>(A: GenericMatrix<T>, B: GenericMatrix<T>): voi
 /**
  * Scales matrix by factor n
  */
-export const scalarProduct = (A: Matrix, n: number): Matrix => A.map(e => e * n);
+export const scalarProduct = (A: Matrix, n: number): Matrix => A.map(e => e*n);
