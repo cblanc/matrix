@@ -2,11 +2,11 @@ interface MapFunction<T> {
 	(fn: MapIterator<T>): GenericMatrixInterface<T>;
 }
 
-interface MatrixFillFunction<T> {
+interface FillFunction<T> {
 	(value: T): GenericMatrixInterface<T>;
 }
 
-interface VectorFunction<T> {
+interface GetVectorFunction<T> {
 	(n: number): T[];
 }
 
@@ -14,11 +14,11 @@ export interface MapIterator<T> {
 	(elem: T, i: number, j: number): T;
 }
 
-interface ElementFunction<T> {
+interface GetElementFunction<T> {
 	(i: number, j: number): T;
 }
 
-interface StringifyFuntion {
+interface StringifyFunction {
 	(): string;
 }
 
@@ -30,7 +30,7 @@ export interface ForEachIterator<T> {
 	(elem: T, i: number, j: number): void;
 }
 
-interface KDiagonalFunction<T> {
+interface GetDiagonalFunction<T> {
 	(k: number): T[];
 }
 
@@ -41,7 +41,7 @@ interface CloneFunction<T> {
 interface Initialisers<T> {
 	clone: CloneFunction<T>;
 	map: MapFunction<T>;
-	fill: MatrixFillFunction<T>;
+	fill: FillFunction<T>;
 }
 
 interface Accessors<T> {
@@ -54,11 +54,11 @@ interface Accessors<T> {
 }
 
 interface Methods<T> {
-	kDiagonal: KDiagonalFunction<T>;
-	iRow: VectorFunction<T>;
-	jCol: VectorFunction<T>;
-	get: ElementFunction<T>;
-	toString: StringifyFuntion;
+	kDiagonal: GetDiagonalFunction<T>;
+	iRow: GetVectorFunction<T>;
+	jCol: GetVectorFunction<T>;
+	get: GetElementFunction<T>;
+	toString: StringifyFunction;
 	forEach: ForEachFunction<T>;
 }
 

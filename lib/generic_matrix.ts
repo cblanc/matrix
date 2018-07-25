@@ -179,9 +179,7 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	public toString() {
 		const maxLength: number = this.data
 			.map(elem => `${elem}`.length)
-			.reduce((prev, curr) => {
-				return (curr > prev) ? curr : prev
-			});
+			.reduce((prev, curr) => (curr > prev) ? curr : prev);
 		const leftPad = padder(maxLength);
 		return this.rows
 			.map(row => {
