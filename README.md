@@ -3,36 +3,30 @@
 # Matrix
 
 - No mutations (eats up memory)
-- Simple, readable implementation > performance
-- Familiar nomenclature for operations and matrix math
+- Simple, readable implementation over performance
+- Familiar nomenclature for operations and matrix math and JS api
 
 ## Instantiation
 
 ```javascript
-import { GenericMatrix, Matrix } from "@cablanchard/matrix";
+import { Matrix } from "@cablanchard/matrix";
 
-const M = new Matrix(2,3); // Create 2x3 numeric matrix
+new Matrix(2,3); // Create 2x3 numeric matrix
 // [
-// 	0, 0, 0,
+//  0, 0, 0,
 //  0, 0, 0,
 // ]
 
-const M = new Matrix(2, 2).fill(1);
+new Matrix(2, 2).fill(1);
 // [
-// 	1, 1,
+//  1, 1,
 //  1, 1,
 // ]
 
-Matrix(2, 2).map((elem, i, j) => i)
+new Matrix(2, 2).map((elem, i, j) => i)
 // [
-// 	0, 0,
+//  0, 0,
 //  1, 1,
-// ]
-
-const M = new GenericMatrix(2,3); // In case a generic solution is required
-// [
-// 	undefined, undefined, undefined,
-//  undefined, undefined, undefined,
 // ]
 ```
 
@@ -51,11 +45,11 @@ M.transpose    // Returns a new matrix which is a transpose of m
 Throws if elems are out of bounds
 
 ```javascript
-M.iRow(i)         			// Returns i'th row
-M.jCol(j)         			// Returns j'th column
-M.kDiagonal(k)  			  // Returns k'th diagonal
-M.get(i, j)			     		// Gets value at position i, j
-M.forEach((n, i, j))		// Iterates over all values n of matrix in positions i, j
+M.iRow(i)               // Returns i'th row
+M.jCol(j)               // Returns j'th column
+M.kDiagonal(k)          // Returns k'th diagonal
+M.get(i, j)             // Gets value at position i, j
+M.forEach((elem, i, j)) // Iterates over all values n of matrix in positions i, j
 ```
 
 Throws if 2 matrices are incompatible
@@ -64,7 +58,7 @@ Throws if 2 matrices are incompatible
 M.add(N)
 M.subtract(N) // Subtracts N from M
 M.multiply(N)
-M.scale(n)		// Scale by factor n
+M.scale(n)    // Scale by factor n
 ```
 
 ## Utils
@@ -72,3 +66,7 @@ M.scale(n)		// Scale by factor n
 ```javascript
 M.toString()
 ```
+
+## Licence
+
+MIT
