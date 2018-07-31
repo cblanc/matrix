@@ -93,7 +93,7 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	 * @param {T} value
 	 */
 	public fill(value: T) {
-		return this.clone().map(() => value);
+		return this.map(() => value);
 	}
 
 	 /**
