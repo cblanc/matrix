@@ -1,4 +1,4 @@
-import { GenericMatrix } from "./generic_matrix";
+import { GenericMatrix, Matrix } from "./generic_matrix";
 
 interface OutOfBoundsErrorConstructor {
 	M: GenericMatrix<any>, // Should use unkownn type when this is available in TS 3.0
@@ -37,10 +37,28 @@ export class DimensionsNotEqualError extends RangeError {
 		const msg = [
 			"Unable to perform operation due to invalid dimensions.",
 			"Expected both matrices to be of equal size,",
-			`however A is ${A.m} by ${A.n},`,
-			`and B is ${B.m} by ${B.n}`
+			`however ${A} is ${A.m} by ${A.n},`,
+			`and ${B} is ${B.m} by ${B.n}`
 		].join(" ");
 		super(msg);
+		Object.setPrototypeOf(this, new.target.prototype);
+	}
+};
+
+interface DimensonsIncompatibleError {
+	A: Matrix,
+	B: Matrix,
+}
+
+export class DimensionsIncompatibleError extends RangeError {
+	constructor(options: DimensonsIncompatibleError) {
+		const { A, B } = options;
+		const msg = [
+			"Unable to perform product operation due to invalid dimensions.",
+		];
+		if (A.m !== B.n) msg.push(`m of ${A} does not equal n of ${B}`);
+		if (A.n !== B.m) msg.push(`n of ${A} does not equal m of ${B}`);
+		super(msg.join(" "));
 		Object.setPrototypeOf(this, new.target.prototype);
 	}
 };
