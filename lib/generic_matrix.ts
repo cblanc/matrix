@@ -169,8 +169,10 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	 * Returns transpose of matrix
 	 */
 	get transpose() {
-		return new (this.constructor as any)(this.n, this.m)
-			.map((_: T, i: number, j: number) => this.get(j, i));
+		const M = this.clone();
+		M.m = this.n;
+		M.n = this.m;
+		return M.map((_: T, i: number, j: number) => this.get(j, i));
 	}
 
 	/**
