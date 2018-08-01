@@ -24,11 +24,20 @@ export class Matrix extends GenericMatrix<number> {
 	}
 
 	/**
-	 * Returns a vector that returns ith row
+	 * Returns a vector that represents ith row
 	 */
 	iVector(i: number): RowVector {
 		const result = new RowVector(this.n);
 		result.data = this.iRow(i);
+		return result;
+	}
+
+	/**
+	 * Returns a vector that represents jth column
+	 */
+	jVector(j: number): ColumnVector {
+		const result = new ColumnVector(this.m);
+		result.data = this.jCol(j);
 		return result;
 	}
 }
