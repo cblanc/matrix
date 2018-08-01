@@ -22,4 +22,37 @@ export class Matrix extends GenericMatrix<number> {
 	scale(n: number): Matrix {
 		return scalarProduct(this, n);
 	}
+
+	/**
+	 * Returns a vector that returns ith row
+	 */
+	iVector(i: number): RowVector {
+		const result = new RowVector(this.n);
+		result.data = this.iRow(i);
+		return result;
+	}
+}
+
+export class RowVector extends Matrix {
+	constructor(n: number) {
+		super(1, n);
+	}
+
+	clone() {
+		const m = new (this.constructor as any)(this.n);
+		m.matrix = this.data.slice(0);
+		return m;
+	}
+}
+
+export class ColumnVector extends Matrix {
+	constructor(m: number) {
+		super(m, 1);
+	}
+
+	clone() {
+		const m = new (this.constructor as any)(this.m);
+		m.matrix = this.data.slice(0);
+		return m;
+	}
 }
