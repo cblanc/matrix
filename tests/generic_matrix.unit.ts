@@ -1,10 +1,7 @@
 import { assert } from "chai";
 import { OutOfBoundsError } from "../lib/errors";
 import { GenericMatrix } from "../lib/generic_matrix";
-
-const randomInt = (n: number): number => Math.floor(Math.random() * n);
-
-const mapCoords = (_: any, i:number, j: number): string => `${i},${j}`;
+import { randomInt, mapCoords } from "./helper/util";
 
 describe("GenericMatrix", () => {
 	describe("#clone", () => {
