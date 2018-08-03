@@ -1,7 +1,21 @@
 import { assert } from "chai";
-import { DimensionsNotEqualError } from "../lib/errors";
-import { GenericMatrix, Matrix } from "../lib/index";
-import { equals, add, subtract, scalarProduct } from "../lib/operations";
+import {
+	DimensionsIncompatibleError,
+	DimensionsNotEqualError,
+} from "../lib/errors";
+import {
+	ColumnVector,
+	GenericMatrix,
+	Matrix,
+	RowVector,
+} from "../lib/index";
+import {
+	add,
+	dotProduct,
+	equals,
+	subtract,
+	scalarProduct,
+} from "../lib/operations";
 
 describe("Matrix operations", () => {
 	describe("equals", () => {
@@ -17,8 +31,8 @@ describe("Matrix operations", () => {
 		});
 		it ("throws an error if matrices are invalidly sized", () => {
 			const A = new GenericMatrix(4,2).fill(0);
-			const B = new GenericMatrix(0,2).fill(0);
-			const C = new GenericMatrix(4,0).fill(0);
+			const B = new GenericMatrix(1,2).fill(0);
+			const C = new GenericMatrix(4,1).fill(0);
 			assert.throws(() => equals(A, B), DimensionsNotEqualError);
 			assert.throws(() => equals(A, C), DimensionsNotEqualError);
 		});
@@ -34,8 +48,8 @@ describe("Matrix operations", () => {
 		});
 		it ("throws an error if matrices are invalidly size", () => {
 			const A = new Matrix(2,3).fill(0);
-			const B = new Matrix(0,3).fill(0);
-			const C = new Matrix(2,0).fill(0);
+			const B = new Matrix(1,3).fill(0);
+			const C = new Matrix(2,1).fill(0);
 			assert.throws(() => add(A, B), DimensionsNotEqualError);
 			assert.throws(() => add(A, C), DimensionsNotEqualError);
 		});
@@ -51,8 +65,8 @@ describe("Matrix operations", () => {
 		});
 		it ("throws an error if matrices are invalidly size", () => {
 			const A = new Matrix(2,3).fill(0);
-			const B = new Matrix(0,3).fill(0);
-			const C = new Matrix(2,0).fill(0);
+			const B = new Matrix(1,3).fill(0);
+			const C = new Matrix(2,1).fill(0);
 			assert.throws(() => subtract(A, B), DimensionsNotEqualError);
 			assert.throws(() => subtract(A, C), DimensionsNotEqualError);
 		});
@@ -73,5 +87,22 @@ describe("Matrix operations", () => {
 			const R3 = scalarProduct(C, 0);
 			assert.isTrue(equals(D, R3));
 		});
-	})
+	});
+
+	describe("dotProduct", () => {
+		it ("throws if R.n !== C.m", () => {
+			assert.throws(() => {
+				const R = new RowVector(3);
+				const C = new ColumnVector(4);
+				dotProduct(R, C);
+			}, DimensionsIncompatibleError);	
+		});
+		it ("dot products two vectors", () => {
+			const sum = (prev: number, curr: number) => prev + curr;
+			const R = new RowVector(5).fromArray(   [1, -2, 2, 0, -2]);
+			const C = new ColumnVector(5).fromArray([5, +3, 4, 9, -3]);
+			assert.equal(dotProduct(R, C),          [5, -6, 8, 0, +6]
+				.reduce(sum, 0));
+		});
+	});
 });

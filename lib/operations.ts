@@ -1,5 +1,13 @@
-import { DimensionsNotEqualError } from "./errors";
-import { GenericMatrix, Matrix } from "./index";
+import {
+	DimensionsIncompatibleError,
+	DimensionsNotEqualError,
+} from "./errors";
+import {
+	ColumnVector,
+	GenericMatrix,
+	Matrix,
+	RowVector,
+} from "./index";
 
 /**
  * Adds two matrices
@@ -37,3 +45,17 @@ const assertEqualDimensions = <T>(A: GenericMatrix<T>, B: GenericMatrix<T>): voi
  * Scales matrix by factor n
  */
 export const scalarProduct = (A: Matrix, n: number): Matrix => A.map(e => e*n);
+
+const assertProductDimentions = (A: Matrix, B: Matrix): void => {
+	if (A.m !== B.n) throw new DimensionsIncompatibleError({ A, B });
+	if (A.n !== B.m) throw new DimensionsIncompatibleError({ A, B });
+};
+
+/**
+ * dot products two vectors
+ */
+export const dotProduct = (R: RowVector, C: ColumnVector): number => {
+	assertProductDimentions(R, C);
+	const cData = C.data;
+	return R.data.reduce((prev: number, r: number, i) => prev + r * cData[i], 0);
+};
