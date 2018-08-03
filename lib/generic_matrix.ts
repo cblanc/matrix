@@ -228,4 +228,11 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	equals(M: GenericMatrix<T>): boolean {
 		return equals<T>(this, M);
 	}
+
+	/**
+	 * Shorthand equals
+	 */
+	eq(M: GenericMatrix<T>): boolean {
+		return this.equals(M);
+	}
 }

@@ -302,4 +302,12 @@ describe("GenericMatrix", () => {
 			assert.isTrue(A.equals(B));
 		});
 	});
+
+	describe("eq", () => {
+		it ("aliases to equality method", () => {
+			const A = new GenericMatrix(2,2).fill(0);
+			const B = new GenericMatrix(2,2).fill(0);
+			assert.isTrue(A.eq(B));
+		});
+	});
 });

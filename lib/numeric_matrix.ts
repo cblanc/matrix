@@ -63,8 +63,18 @@ export class Matrix extends GenericMatrix<number> {
 		return range(0, this.n).map(j => this.jVector(j));
 	}
 
+	/**
+	 * Multiplies this matrix (LHS) and that matrix (RHS)
+	 */
 	multiply(B: Matrix): Matrix {
 		return multiply(this, B);
+	}
+
+	/**
+	 * Shorthand for multiply
+	 */
+	x(B: Matrix): Matrix {
+		return this.multiply(B);
 	}
 }
 
