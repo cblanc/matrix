@@ -64,13 +64,8 @@ export class DimensionsIncompatibleError extends RangeError {
 	}
 };
 
-interface InvalidArraySizeErrorConstructor {
-	A: Matrix,
-}
-
-export class InvalidArraySizeError extends RangeError {
-	constructor(options: InvalidArraySizeErrorConstructor) {
-		const { A } = options;
+export class InvalidArraySizeError<T> extends RangeError {
+	constructor(A: GenericMatrix<T>) {
 		const msg = [
 			"Invalid array size presented.",
 			`Expecting ${A.size} for a ${A.m} by ${A.n} matrix.`,

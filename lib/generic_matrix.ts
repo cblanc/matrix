@@ -51,7 +51,6 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	 * @param {T[]} data
 	 */
 	set matrix(data) {
-		const { size } = this;
 		if (data.length !== this.size) throw new InvalidArraySizeError(this);
 		this.data = data;
 	}
