@@ -1,4 +1,5 @@
-import { GenericMatrix, Matrix } from "./generic_matrix";
+import { GenericMatrix } from "./generic_matrix";
+import { Matrix } from "./numeric_matrix";
 
 interface OutOfBoundsErrorConstructor {
 	M: GenericMatrix<any>, // Should use unkownn type when this is available in TS 3.0
@@ -45,13 +46,13 @@ export class DimensionsNotEqualError extends RangeError {
 	}
 };
 
-interface DimensonsIncompatibleError {
+interface DimensonsIncompatibleErrorContructor {
 	A: Matrix,
 	B: Matrix,
 }
 
 export class DimensionsIncompatibleError extends RangeError {
-	constructor(options: DimensonsIncompatibleError) {
+	constructor(options: DimensonsIncompatibleErrorContructor) {
 		const { A, B } = options;
 		const msg = [
 			"Unable to perform product operation due to invalid dimensions.",
@@ -62,3 +63,19 @@ export class DimensionsIncompatibleError extends RangeError {
 		Object.setPrototypeOf(this, new.target.prototype);
 	}
 };
+
+interface InvalidArraySizeErrorConstructor {
+	A: Matrix,
+}
+
+export class InvalidArraySizeError extends RangeError {
+	constructor(options: InvalidArraySizeErrorConstructor) {
+		const { A } = options;
+		const msg = [
+			"Invalid array size presented.",
+			`Expecting ${A.size} for a ${A.m} by ${A.n} matrix.`,
+		];
+		super(msg.join(" "));
+		Object.setPrototypeOf(this, new.target.prototype);
+	}
+}
