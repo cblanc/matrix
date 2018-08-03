@@ -5,7 +5,7 @@ describe("Vectors", () => {
 	describe("RowVector", () => {
 		describe("instantiation", () => {
 			it ("creates a row vector", () => {
-				const V = new RowVector(4)//.fill(2);
+				const V = new RowVector(4).fill(2);
 				assert.equal(V.size, 4);
 				assert.equal(V.m, 1);
 				assert.equal(V.n, 4);
