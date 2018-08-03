@@ -11,6 +11,14 @@ describe("Vectors", () => {
 				assert.equal(V.n, 4);
 			});
 		});
+
+		describe("dot", () => {
+			it ("dot products a column vector", () => {
+				const R = new RowVector(2).fromArray([1,2]);
+				const C = new ColumnVector(2).fromArray([5,5]);
+				assert.equal(R.dot(C), 5 + 10);
+			});
+		});
 	});
 
 	describe("ColumnVector", () => {

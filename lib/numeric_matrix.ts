@@ -1,6 +1,7 @@
 import { GenericMatrix } from "./generic_matrix";
 import { 
 	add,
+	dotProduct,
 	scalarProduct,
 	subtract,
 } from "./operations";
@@ -51,6 +52,10 @@ export class RowVector extends Matrix {
 		const m = new (this.constructor as any)(this.n);
 		m.matrix = this.data.slice(0);
 		return m;
+	}
+
+	dot(columnVector: ColumnVector): number {
+		return dotProduct(this, columnVector);
 	}
 }
 
