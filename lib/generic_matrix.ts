@@ -92,8 +92,9 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	}
 
 	public fromArray(arr: T[]) {
-		this.matrix = arr;
-		return this;
+		const R = this.clone();
+		R.matrix = arr;
+		return R;
 	}
 
 	 /**

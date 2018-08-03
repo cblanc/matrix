@@ -1,5 +1,8 @@
 import { assert } from "chai";
-import { OutOfBoundsError } from "../lib/errors";
+import {
+	InvalidArraySizeError,
+	OutOfBoundsError,
+} from "../lib/errors";
 import { GenericMatrix } from "../lib/generic_matrix";
 import { randomInt, mapCoords } from "./helper/util";
 
@@ -16,12 +19,19 @@ describe("GenericMatrix", () => {
 
 	describe("#fromArray", () => {
 		it ("throws if array is invalidly sized", () => {
+			const M = new GenericMatrix(2,3);
 			assert.throws(() => {
-
-			}, );
+				M.fromArray(new Array(7).fill(null))
+			}, InvalidArraySizeError);
 		});
-		it ("returns a new instance with updated matrix");
-	})
+		it ("returns a new instance with updated matrix", () => {
+			const M = new GenericMatrix(2,2).fill(1);
+			const data = new Array(4).fill(2);
+			const N = M.fromArray(data);
+			assert.notEqual(M, N);
+			assert.deepEqual(N.data, data);
+		});
+	});
 
 	describe("matrix getter", () => {
 		it ("returns copy of underlying data structure", () => {
