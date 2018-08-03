@@ -48,6 +48,17 @@ describe("Matrix", () => {
 		});
 	});
 
+	describe("iVectors", () => {
+		it ("returns all row vectors", () => {
+			const A = new Matrix(2,2).map((elem, i) => i);
+			const Expected0 = new RowVector(2).fill(0);
+			const Expected1 = new RowVector(2).fill(1);
+			const iVectors = A.iVectors;
+			assert.isTrue(iVectors[0].equals(Expected0));
+			assert.isTrue(iVectors[1].equals(Expected1));
+		});
+	});
+
 	describe("jVector", () => {
 		it ("returns column vector", () => {
 			const A = new Matrix(2,2).map((elem, i, j) => j);
@@ -57,6 +68,17 @@ describe("Matrix", () => {
 			const V1 = A.jVector(1);
 			assert.isTrue(V0.equals(Expected0));
 			assert.isTrue(V1.equals(Expected1));
+		});
+	});
+
+	describe("iVectorss", () => {
+		it ("returns all row vectors", () => {
+			const A = new Matrix(2,2).map((elem, i, j) => j);
+			const Expected0 = new ColumnVector(2).fill(0);
+			const Expected1 = new ColumnVector(2).fill(1);
+			const jVectors = A.jVectors;
+			assert.isTrue(jVectors[0].equals(Expected0));
+			assert.isTrue(jVectors[1].equals(Expected1));
 		});
 	});
 });

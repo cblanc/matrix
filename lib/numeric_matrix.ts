@@ -6,6 +6,12 @@ import {
 	subtract,
 } from "./operations";
 
+const range = (start: number, end: number): number[] => {
+	const result = [];
+	for (let i = start; i < end; i++) result.push(i);
+	return result;
+};
+
 export class Matrix extends GenericMatrix<number> {
 	constructor(m: number, n: number) {
 		super(m, n);
@@ -34,12 +40,26 @@ export class Matrix extends GenericMatrix<number> {
 	}
 
 	/**
+	 * Returns all iVectors
+	 */
+	get iVectors(): RowVector[] {
+		return range(0, this.m).map(i => this.iVector(i));
+	}
+
+	/**
 	 * Returns a vector that represents jth column
 	 */
 	jVector(j: number): ColumnVector {
 		const result = new ColumnVector(this.m);
 		result.data = this.jCol(j);
 		return result;
+	}
+
+	/**
+	 * Returns all jVectors
+	 */
+	get jVectors(): ColumnVector[] {
+		return range(0, this.n).map(j => this.jVector(j));
 	}
 }
 
