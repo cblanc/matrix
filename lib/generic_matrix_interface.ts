@@ -6,6 +6,10 @@ interface FillFunction<T> {
 	(value: T): GenericMatrixInterface<T>;
 }
 
+interface FromArrayFunction<T> {
+	(arr: T[]): GenericMatrixInterface<T>;
+}
+
 interface GetVectorFunction<T> {
 	(n: number): T[];
 }
@@ -42,6 +46,7 @@ interface Initialisers<T> {
 	clone: CloneFunction<T>;
 	map: MapFunction<T>;
 	fill: FillFunction<T>;
+	fromArray: FromArrayFunction<T>;
 }
 
 interface Accessors<T> {

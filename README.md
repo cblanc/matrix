@@ -28,6 +28,12 @@ new Matrix(2, 2).map((elem, i, j) => i)
 //  0, 0,
 //  1, 1,
 // ]
+
+new Matrix(2,2).fromArray([0,1,2,3]);
+// [
+//  0, 1,
+//  2, 3,
+// ]
 ```
 
 ## Accessors

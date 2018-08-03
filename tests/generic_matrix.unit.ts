@@ -14,6 +14,15 @@ describe("GenericMatrix", () => {
 		});
 	});
 
+	describe("#fromArray", () => {
+		it ("throws if array is invalidly sized", () => {
+			assert.throws(() => {
+
+			}, );
+		});
+		it ("returns a new instance with updated matrix");
+	})
+
 	describe("matrix getter", () => {
 		it ("returns copy of underlying data structure", () => {
 			const mat = new GenericMatrix(2,2);

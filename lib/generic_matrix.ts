@@ -1,4 +1,7 @@
-import { OutOfBoundsError } from "./errors";
+import { 
+	InvalidArraySizeError,
+	OutOfBoundsError,
+} from "./errors";
 import { 
 	ForEachIterator,
 	GenericMatrixInterface,
@@ -49,14 +52,7 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	 */
 	set matrix(data) {
 		const { size } = this;
-		if (data.length !== this.size) {
-			const { m, n } = this;
-			const msg = [
-				`Invalid array size presented`,
-				`Expecting ${size} for a ${m} by ${n} matrix`,
-			].join(". ")
-			throw new Error(msg);
-		}
+		if (data.length !== this.size) throw new InvalidArraySizeError(this);
 		this.data = data;
 	}
 
@@ -94,6 +90,11 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	 */
 	public fill(value: T) {
 		return this.map(() => value);
+	}
+
+	public fromArray(arr: T[]) {
+		this.matrix = arr;
+		return this;
 	}
 
 	 /**
