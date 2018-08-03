@@ -59,3 +59,14 @@ export const dotProduct = (R: RowVector, C: ColumnVector): number => {
 	const cData = C.data;
 	return R.data.reduce((prev: number, r: number, i) => prev + r * cData[i], 0);
 };
+
+/**
+ * Multiplies two matrices
+ */
+export const multiply = (A: Matrix, B: Matrix): Matrix => {
+	assertProductDimentions(A, B);
+	const aVectors = A.iVectors;
+	const bVectors = B.jVectors;
+	return new Matrix(A.m, B.n)
+		.map((_, i, j) => aVectors[i].dot(bVectors[j]));
+}
