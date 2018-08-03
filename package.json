@@ -1,5 +1,5 @@
 {
-  "name": "@cablancard/matrix",
+  "name": "@cablanchard/matrix",
   "version": "0.0.1",
   "description": "Containers for some kind of number",
   "repository": {
@@ -37,14 +37,14 @@
     "all": true
   },
   "engines": {
-    "node": ">=6.9"
+    "node": ">=8.0"
   },
   "author": "cblanc",
   "license": "MIT",
   "devDependencies": {
     "@types/chai": "~4.1.4",
     "@types/mocha": "~5.2.3",
-    "@types/node": "^10.5.1",
+    "@types/node": "~10.5.1",
     "chai": "~4.1.2",
     "coveralls": "~3.0.1",
     "mocha": "~5.2.0",
