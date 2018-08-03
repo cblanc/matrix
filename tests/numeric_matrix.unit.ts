@@ -81,4 +81,25 @@ describe("Matrix", () => {
 			assert.isTrue(jVectors[1].equals(Expected1));
 		});
 	});
+
+	describe("multiply", () => {
+		it ("multiplies two matrices", () => {
+			const A = new Matrix(3,2).fromArray([
+				0,7,
+				1,8,
+				2,9,
+			]);
+			const B = new Matrix(2,3).fromArray([
+				3,2,4,
+				9,0,1,
+			]);
+			const expected = [
+				0*3+7*9, 0*2+7*0, 0*4+7*1,
+				1*3+8*9, 1*2+8*0, 1*4+8*1,
+				2*3+9*9, 2*2+9*0, 2*4+9*1,
+			];
+			const E = new Matrix(3, 3).fromArray(expected);
+			assert.isTrue(A.multiply(B).equals(E));
+		});
+	});
 });

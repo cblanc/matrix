@@ -2,6 +2,7 @@ import { GenericMatrix } from "./generic_matrix";
 import { 
 	add,
 	dotProduct,
+	multiply,
 	scalarProduct,
 	subtract,
 } from "./operations";
@@ -60,6 +61,10 @@ export class Matrix extends GenericMatrix<number> {
 	 */
 	get jVectors(): ColumnVector[] {
 		return range(0, this.n).map(j => this.jVector(j));
+	}
+
+	multiply(B: Matrix): Matrix {
+		return multiply(this, B);
 	}
 }
 
