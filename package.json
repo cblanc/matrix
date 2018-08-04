@@ -20,7 +20,8 @@
       "lib/**/*.ts"
     ],
     "exclude": [
-      "dist/*"
+      "dist/*",
+      "**/*.d.ts"
     ],
     "extension": [
       ".ts"
@@ -32,8 +33,6 @@
       "text-summary",
       "html"
     ],
-    "sourceMap": true,
-    "instrument": true,
     "all": true
   },
   "engines": {
