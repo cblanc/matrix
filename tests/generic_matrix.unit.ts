@@ -295,6 +295,19 @@ describe("GenericMatrix", () => {
 		});
 	});
 
+	describe("antiDiagonal", () => {
+		it ("returns antiDiagonal", () => {
+			const square = new GenericMatrix<string>(3,3).map(mapCoords);
+			const tall = new GenericMatrix<string>(3,2).map(mapCoords);
+			const wide = new GenericMatrix<string>(2,3).map(mapCoords);
+
+			console.log(square.antiDiagonal);
+			assert.deepEqual(square.antiDiagonal, ["2,0", "1,1", "0,2"]);
+			assert.deepEqual(wide.antiDiagonal, ["1,0", "0,1"]);
+			assert.deepEqual(tall.antiDiagonal, ["2,0", "1,1"]);
+		});
+	});
+
 	describe("equals", () => {
 		it ("aliases to equality method", () => {
 			const A = new GenericMatrix(2,2).fill(0);

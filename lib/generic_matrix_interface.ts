@@ -55,6 +55,7 @@ interface Accessors<T> {
 	rows: T[][];
 	columns: T[][];
 	diagonal: T[];
+	antiDiagonal: T[];
 	transpose: GenericMatrixInterface<T>;
 }
 

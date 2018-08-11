@@ -222,6 +222,14 @@ export class GenericMatrix<T> implements GenericMatrixInterface<T> {
 	}
 
 	/**
+	 * Returns 0th anti-diagonal
+	 */
+	get antiDiagonal() {
+		const flipMatrix = (_: T, i: number, j: number) => this.get(this.m - i - 1, j);
+		return this.map(flipMatrix).diagonal;
+	}
+
+	/**
 	 * Checks for equality against matrix M
 	 * @param  {GenericMatrix<T>} M
 	 */

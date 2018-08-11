@@ -2,10 +2,6 @@
 
 # Matrix
 
-- No mutations (eats up memory)
-- Simple, readable implementation over performance
-- Familiar nomenclature for operations and matrix math and JS api
-
 ## Instantiation
 
 ```javascript
@@ -42,7 +38,7 @@ new Matrix(2,2).fromArray([0,1,2,3]);
 M.rows         // Returns an array of 1D matrices representing rows
 M.columns      // Returns an array of 1D matrices representing columns
 M.diagonal     // Returns main diagonal
-M.antiDiagonal // Returns main antidiagonal (todo)
+M.antiDiagonal // Returns main antidiagonal
 M.transpose    // Returns a new matrix which is a transpose of m
 ```
 
@@ -62,11 +58,11 @@ Throws if 2 matrices are incompatible
 
 ```javascript
 M.equals(N)   // Compares M and N
-M.eq(N)				// Shorthand for equals
+M.eq(N)       // Shorthand for equals
 M.add(N)
 M.subtract(N) // Subtracts N from M
 M.multiply(N) // Multiplies M (LHS) by N (RHS)
-M.x(N)				// Shorthand for multiply
+M.x(N)        // Shorthand for multiply
 M.scale(n)    // Scale by factor n
 ```
 
