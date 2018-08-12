@@ -1,4 +1,5 @@
 import { assert } from "chai";
+import { randomInt } from "./helper/util";
 import { Matrix, RowVector, ColumnVector } from "../lib/numeric_matrix";
 import { mapIncrementer } from "./helper/util";
 
@@ -123,6 +124,16 @@ describe("Matrix", () => {
 			];
 			const E = new Matrix(3, 3).fromArray(expected);
 			assert.isTrue(A.multiply(B).equals(E));
+		});
+
+		it ("appears to satisfy associativity", () => {
+			const rand = () => randomInt(10) + 1;
+			const A = new Matrix(3, 3).map(rand);
+			const B = new Matrix(3, 3).map(rand);
+			const C = new Matrix(3, 3).map(rand);
+			const LHS = A.multiply(B).multiply(C);
+			const RHS = A.multiply(B.multiply(C));
+			assert.isTrue(LHS.eq(RHS));
 		});
 	});
 
