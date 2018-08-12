@@ -205,6 +205,13 @@ describe("GenericMatrix", () => {
 				["0,2", "1,2"],
 			]);
 		});
+
+		it ("tranpose of tranpose is noop", () => {
+			const M = new GenericMatrix(10,2).fill(mapCoords);
+			assert.isTrue(
+				M.transpose.transpose.eq(M)
+			);
+		});
 	});
 
 	describe("toString", () => {
