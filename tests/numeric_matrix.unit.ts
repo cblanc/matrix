@@ -17,6 +17,22 @@ describe("Matrix", () => {
 			const C = new Matrix(2,3).fill(3);
 			assert.isTrue(A.add(B).equals(C));
 		});
+
+		it ("appears to be commutative", () => {
+			const M = new Matrix(2,3).fill(1);
+			const N = new Matrix(2,3).fill(2);
+			assert.isTrue(
+				M.add(N).eq(N.add(M))
+			);
+		});
+
+		it ("produces equivalent results for sum of transpose and transpose of sum", () => {
+			const M = new Matrix(2,3).fill(1);
+			const N = new Matrix(2,3).fill(2);
+			assert.isTrue(
+				M.add(N).transpose.eq(M.transpose.add(N.transpose))
+			);
+		});
 	});
 
 	describe("#subtract", () => {
