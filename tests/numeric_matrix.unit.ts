@@ -50,6 +50,13 @@ describe("Matrix", () => {
 			const B = new Matrix(8,2).fill(12)
 			assert.isTrue(A.scale(4).equals(B));
 		});
+
+		it ("produces equivalent result for scalar of tranpose and tranpose of scalar product", () => {
+			const A = new Matrix(8,2).fill(3)
+			assert.isTrue(
+				A.scale(10).transpose.eq(A.transpose.scale(10))
+			);
+		});
 	});
 
 	describe("iVector", () => {
