@@ -38,8 +38,8 @@ export class DimensionsNotEqualError extends RangeError {
 		const msg = [
 			"Unable to perform operation due to invalid dimensions.",
 			"Expected both matrices to be of equal size,",
-			`however ${A} is ${A.m} by ${A.n},`,
-			`and ${B} is ${B.m} by ${B.n}`
+			`however one is ${A.m} by ${A.n},`,
+			`and the other is ${B.m} by ${B.n}`
 		].join(" ");
 		super(msg);
 		Object.setPrototypeOf(this, new.target.prototype);
@@ -57,8 +57,8 @@ export class DimensionsIncompatibleError extends RangeError {
 		const msg = [
 			"Unable to perform product operation due to invalid dimensions.",
 		];
-		if (A.m !== B.n) msg.push(`m of ${A} does not equal n of ${B}`);
-		if (A.n !== B.m) msg.push(`n of ${A} does not equal m of ${B}`);
+		if (A.m !== B.n) msg.push(`m(=${A.m}) of \n\n${A}\n\n does not equal n(=${B.n}) of \n\n${B}\n\n`);
+		if (A.n !== B.m) msg.push(`n(=${A.n}) of \n\n${A}\n\n does not equal m(=${B.m}) of \n\n${B}\n\n`);
 		super(msg.join(" "));
 		Object.setPrototypeOf(this, new.target.prototype);
 	}
