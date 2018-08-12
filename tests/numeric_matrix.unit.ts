@@ -107,6 +107,8 @@ describe("Matrix", () => {
 	});
 
 	describe("multiply", () => {
+		const rand = () => randomInt(10) + 1;
+
 		it ("multiplies two matrices", () => {
 			const A = new Matrix(3,2).fromArray([
 				0,7,
@@ -126,13 +128,32 @@ describe("Matrix", () => {
 			assert.isTrue(A.multiply(B).equals(E));
 		});
 
-		it ("appears to satisfy associativity", () => {
-			const rand = () => randomInt(10) + 1;
+		it ("appears to satisfy associativity", () => {			
 			const A = new Matrix(3, 3).map(rand);
 			const B = new Matrix(3, 3).map(rand);
 			const C = new Matrix(3, 3).map(rand);
 			const LHS = A.multiply(B).multiply(C);
 			const RHS = A.multiply(B.multiply(C));
+			assert.isTrue(LHS.eq(RHS));
+		});
+
+		it ("appears to satisfy left distributivity", () => {
+			const A = new Matrix(3, 3).map(rand);
+			const B = new Matrix(3, 3).map(rand);
+			const C = new Matrix(3, 3).map(rand);
+			// (A+B)C = AC+BC 
+			const LHS = A.add(B).multiply(C);
+			const RHS = A.multiply(C).add(B.multiply(C));
+			assert.isTrue(LHS.eq(RHS));
+		});
+
+		it ("appears to satisfy right distributivity", () => {
+			const A = new Matrix(3, 3).map(rand);
+			const B = new Matrix(3, 3).map(rand);
+			const C = new Matrix(3, 3).map(rand);
+			// C(A+B) = CA+CB
+			const LHS = C.multiply(A.add(B));
+			const RHS = C.multiply(A).add(C.multiply(B));
 			assert.isTrue(LHS.eq(RHS));
 		});
 	});
