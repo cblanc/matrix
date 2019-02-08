@@ -45,7 +45,7 @@ describe("GenericMatrix", () => {
 	describe("matrix setter", () => {
 		it ("assigns matrix", () => {
 			const mat = new GenericMatrix(2,2);
-			mat.matrix.forEach(assert.isUndefined.bind(assert));
+      mat.matrix.forEach(e => assert.isUndefined(e));
 			const n = 1;
 			mat.matrix = new Array(4).fill(n);
 			mat.matrix.forEach(e => assert.equal(e, n));
