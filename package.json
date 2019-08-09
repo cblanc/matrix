@@ -50,7 +50,7 @@
   "author": "cblanc",
   "license": "MIT",
   "devDependencies": {
-    "@types/chai": "~4.1.7",
+    "@types/chai": "~4.2.0",
     "@types/mocha": "~5.2.5",
     "@types/node": "~12.7.0",
     "chai": "~4.2.0",
